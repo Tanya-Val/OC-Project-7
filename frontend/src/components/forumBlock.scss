@@ -1,0 +1,43 @@
+@import "../utils/mixins.scss";
+
+.mainContainerForumBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 7px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    height: 40vh;
+    margin-top: 2vh;
+
+    .forum-block-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+        .forum-author {
+            color: $secondary-color-grey;
+            order: 0;
+            flex: 1;
+            margin-top: 12%;
+        }
+        .forum-image {
+            .material-symbols-outlined {
+                font-size: 200px;
+                color: $secondary-color-grey;
+                order: 1;
+            }
+        }
+
+        .forum-block-icons {
+            .material-symbols-outlined {
+                margin-left: 5px;
+                color: $primary-color-red;
+            }
+            
+        }
+    }
+}

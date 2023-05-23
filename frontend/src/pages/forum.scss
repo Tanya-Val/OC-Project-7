@@ -1,0 +1,17 @@
+@import "../layouts/nav--persona-space.scss";
+@import "../utils/variables.scss";
+@import "../utils/resets.scss";
+@import "../components/newPost.scss";
+@import "../components/forumBlock.scss";
+
+.Forum--Main {
+    @include flex-right(column);
+    background-color: $secondary-color-grey;
+    height: 90vh;
+
+    .forumContainer{
+        width: 50%;
+        margin-left: 10%;
+    }
+    
+}

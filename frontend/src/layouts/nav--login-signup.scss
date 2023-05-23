@@ -1,0 +1,13 @@
+@import '../utils/variables.scss';
+
+.LoginSignup--Nav{
+    display: flex;
+    align-items: center;
+    background-color: $primary-color-blue;
+    height: 10vh;
+    
+    .Login--Nav--Logo{
+        width: 15rem;
+        margin-left: 1rem;
+    }
+}
