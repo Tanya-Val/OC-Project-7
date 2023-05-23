@@ -1,18 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.scss'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginSignup from './pages/LoginSignup.jsx';
+import Signup from './pages/Signup.jsx';
+import PersonalSpace from './pages/PersonaSpace.jsx';
+import Forum from './pages/Forum.jsx';
 
 function App() {
-  
-
   return (
-    <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<LoginSignup />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/personalspace" element={<PersonalSpace />} />
+          <Route path="/forum" element={<Forum />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
