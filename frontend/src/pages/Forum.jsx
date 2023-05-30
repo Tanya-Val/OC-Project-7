@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../assets/logo_white.png';
-import NewPost from '../components/NewPostProp.jsx'
+import NewPost from '../components/NewPostProps.jsx'
+import FeedPost from '../components/FeedPostProps.jsx'
 
 export default function Forum() {
     return (
@@ -32,37 +33,8 @@ export default function Forum() {
                     {/*Addign props when connecting ot thedatabase */}
                     <NewPost />
 
-                    <div className="mainContainerForumBlock">
-                        <div className="forum-block-content">
-                            <div className="forum-author">
-                                <h3>Author name</h3>
-                                <h4>Forum content</h4>
-                            </div>
-                            <div className="forum-image">
-                                <span className="material-symbols-outlined" id="image">
-                                    gallery_thumbnail
-                                </span>
-                            </div>
-                        </div>
-                        <div className="forum-block-icons">
-                            <span className="material-symbols-outlined">
-                                thumb_up
-                            </span>
-                            <span className="material-symbols-outlined">
-                                thumb_down
-                            </span>
-                            <span className="material-symbols-outlined">
-                                comment
-                            </span>
-                            <span className="material-symbols-outlined">
-                                delete
-                            </span>
-                        </div>
-
-                        <div className="forum-comment">
-                            <h4>Comments</h4>
-                        </div>
-                    </div>
+                    <FeedPost/>
+                    
                 </div>
             </main>
         </div>

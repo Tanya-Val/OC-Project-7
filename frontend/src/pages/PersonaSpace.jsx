@@ -9,15 +9,15 @@ export default function PersonalSpacePage() {
                 <img className="Login--Nav--Logo--personalpage" src={logo} alt="company logo"/>
                 <div>
                 <a href="/forum">
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                     home</span>
                 </a>
                 <a href="/personalspace">
-                     <span class="material-symbols-outlined">
+                     <span className="material-symbols-outlined">
                     account_circle</span>
                 </a>
                 <a href="/">
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                     logout</span>
                 </a>
                 </div>

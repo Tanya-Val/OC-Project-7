@@ -11,9 +11,11 @@
     border: solid;
     border-width: thin;
     border-color: $primary-color-grey;
+    margin-top: 15vh;
     padding-left: 1rem;
     padding-right: 1rem;
     height: 110px;
+    width: 40vw;
     min-width: fit-content;
 
     .ImageFormSpan {
@@ -22,7 +24,7 @@
         flex-direction: row;  
         align-items: center;      
         .profileImage {
-            height: 70px;
+            height: 50px;
             border: solid;
             border-width: thin;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;

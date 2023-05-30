@@ -2,12 +2,13 @@
 @import "../utils/variables.scss";
 @import "../utils/resets.scss";
 @import "../components/newPost.scss";
-@import "../components/forumBlock.scss";
+@import "../components/feedPost.scss";
 
 .Forum--Main {
     @include flex-right(column);
-    background-color: $secondary-color-grey;
+    background-color: white;
     height: 90vh;
+    overflow-y: auto;
 
     .forumContainer{
         width: 50%;
