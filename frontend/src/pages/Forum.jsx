@@ -1,12 +1,13 @@
 import React from 'react'
 import logo from '../assets/logo_white.png';
+import NewPost from '../components/NewPostProp.jsx'
 
 export default function Forum() {
     return (
         <div>
             {/* Navbar */}
             <nav className="PersonaSpace--Nav">
-                <img className="Login--Nav--Logo--personalpage" src={logo} alt="company logo"/>
+                <img className="Login--Nav--Logo--personalpage" src={logo} alt="company logo" />
                 <div>
                     <a href="/forum">
                         <span className="material-symbols-outlined">
@@ -27,15 +28,9 @@ export default function Forum() {
             <main className="Forum--Main">
 
                 <div className="forumContainer">
-                    <div className="mainContainerPostBlock">
-                        <span className="material-symbols-outlined">forum</span>
-                        <form className="form-group">
-                            <input type="text" id="text" name="text" placeholder="New post" required/>
-                        </form>
-                        <span className="material-symbols-outlined">
-                            gallery_thumbnail
-                        </span>
-                    </div>
+
+                    {/*Addign props when connecting ot thedatabase */}
+                    <NewPost />
 
                     <div className="mainContainerForumBlock">
                         <div className="forum-block-content">
