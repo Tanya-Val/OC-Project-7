@@ -2,9 +2,9 @@
 @mixin button-styles {
     
     display: inline-block;
-    height: 2.5rem;
+    height: 4rem;
     font-family: "Inter", sans-serif;
-    font-size: $font-size-p;
+    font-size: 18px;
     color: #fff;
     border-radius: 7px;
     border: 1px solid $primary-color-grey;
@@ -19,9 +19,9 @@ button.btn-login {
     background-color: $primary-color-blue;
     color: white;
     border: none;
-    width: 90%;
-    margin-left: 5%;
-    margin-bottom: 0.5rem;
+    width: 85%;
+    margin-left: 7.5%;
+    margin-bottom: 1rem;
     //margin-top: 1rem;
 }
 

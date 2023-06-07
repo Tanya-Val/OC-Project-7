@@ -5,17 +5,46 @@
 
 //Main container
 .LoginSignup--Main {
-    @include flex-center(row);
-    background-color: $primary-color-grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-content: flex-end;
+    background-color: white;
     height: 90vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
 
-    //Name of the website in the main container
-    .titles {
+    .login-registration-blockSignUp {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         margin: auto;
-        h1 {
-            font-size: 4rem;
-            color: white;
+        width: 55%;
+        height: 70vh;
+        img {
+            height: auto;
+            max-width: 800px;
+            padding-top: 0.5rem;
+        }
+
+        #signUpimage{
+            padding-top: 7vh;
+            max-width: 900px;
+        }
+
+        .titles {
+            margin: auto;
+            h1 {
+                font-size: 6rem;
+                color: $primary-color-blue;
+                
+            }
         }
     }
 
+    
+
+    //Name of the website in the main container
+    
 }

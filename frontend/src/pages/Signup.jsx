@@ -1,5 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo_white.png';
+import signUpimage from '../assets/signUp.jpg';
+
 
 
 export default function LoginSignupPage() {
@@ -7,7 +9,7 @@ export default function LoginSignupPage() {
         <div>
             {/* Navbar */}
             <nav className="LoginSignup--Nav">
-                <img className="Login--Nav--Logo" src={logo} alt="company logo"/>
+                <img className="Login--Nav--Logo" src={logo} alt="company logo" />
             </nav>
 
             {/* Main container */}
@@ -21,7 +23,7 @@ export default function LoginSignupPage() {
                                 id="firstName"
                                 name="firstName"
                                 placeholder="First name"
-                                required/>
+                                required />
                         </div>
 
                         <div className="form-group">
@@ -30,7 +32,7 @@ export default function LoginSignupPage() {
                                 id="lastName"
                                 name="lastName"
                                 placeholder="Last name"
-                                required/>
+                                required />
                         </div>
 
                         <div className="form-group">
@@ -39,7 +41,7 @@ export default function LoginSignupPage() {
                                 id="departament"
                                 name="departament"
                                 placeholder="Departament"
-                                required/>
+                                required />
                         </div>
 
                         <div className="form-group">
@@ -48,7 +50,7 @@ export default function LoginSignupPage() {
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                required/>
+                                required />
                         </div>
 
                         <div className="form-group">
@@ -57,15 +59,19 @@ export default function LoginSignupPage() {
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"
-                                required/>
+                                required />
                         </div>
-                        
+
                         <a href='/personalspace' >
-                                <button className="btn-account" type="button">Create Account
-                                </button>
-                            </a>
-                        
+                            <button className="btn-account" type="button">Create Account
+                            </button>
+                        </a>
+
                     </form>
+                </div>
+
+                <div className="login-registration-blockSignUp">
+                    <img className="corporateImage" id="signUpimage"src={signUpimage} alt="Corporate picture" />
                 </div>
             </div>
         </div>

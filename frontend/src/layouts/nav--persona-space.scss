@@ -6,18 +6,20 @@
     align-items: center;
     background-color: $primary-color-blue;
     height: 10vh;
+    padding-right: 7.5vw;
+    padding-left: 7.5vw;
     
     .Login--Nav--Logo--personalpage{
         width: 15rem;
-        margin-left: 1rem;
         position: relative;
     }
 
     .material-symbols-outlined {
-        padding-left: 1rem;
-        margin-right: 1rem;
+        
+        margin-left: 3rem;
         color: white;
         font-variation-settings: "FILL" 0, "wght" 800, "GRAD" 0, "opsz" 60;
+        font-size: 30px;
     }
 }
 

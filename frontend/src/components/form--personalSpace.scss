@@ -6,10 +6,18 @@
     width: 35%;
     @include flex-center(column);
     margin: auto;
-    background-color: white;
-    height: 50vh;
+    
+    height: 60vh;
     border-radius: 7px;
     font-size: $font-size-p;
+    border: 1px solid $primary-color-grey;
+
+    .login-registration-block-title{
+        color: $primary-color-blue;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+   
 
     form {
         
@@ -17,7 +25,7 @@
         max-width: 400px;
         
         .form-group {
-            margin: 0.5rem;
+            margin: 1rem;
             display: flex;
             justify-content: center;
 
@@ -27,9 +35,9 @@
             input[type="lastName"],
             input[type="departament"] {
                 font-family: "Inter", sans-serif;
-                font-size: $font-size-p;
+                font-size: 18px;
                 width: 90%;
-                height: 2.5rem;
+                height: 4rem;
                 border-radius: 7px;
                 border: 1px solid $primary-color-grey;
                 padding-left: 0.5rem;
