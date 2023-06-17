@@ -48,10 +48,10 @@ export default function PersonalSpacePage() {
 
                         <div className="form-group">
                             <input
-                                type="departament"
-                                id="departament"
-                                name="departament"
-                                placeholder="Departament"
+                                type="department"
+                                id="department"
+                                name="department"
+                                placeholder="Department"
                                 required/>
                         </div>
 

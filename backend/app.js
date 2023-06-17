@@ -1,32 +1,59 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const connection = require('./db.js');
 
+app.use(express.json());
+app.use(cors());
 
-//Allows Cross-Origin Resource Sharing (CORS) for all requests
+// Allows Cross-Origin Resource Sharing (CORS) for all requests
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+});
+
+app.post('/signup', (req, res) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const department = req.body.department;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  connection.query(
+    "INSERT INTO users (firstName, lastName, department, email, password) VALUES (?, ?, ?, ?, ?)",
+    [firstName, lastName, department, email, password],
+    (err, result) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: 'An error occurred while processing the request.' });
+      }
+
+      console.log('Query executed successfully:', result);
+      res.json({ message: 'Signup successful!' });
+    }
+  );
 });
 
 app.use((req, res, next) => {
-    console.log('Request received!');
-    next();
-  });
-  
-  app.use((req, res, next) => {
-    res.status(201);
-    next();
-  });
-  
-  app.use((req, res, next) => {
-    res.json({ message: 'Your request was successful! 2' });
-    next();
-  });
-  
-  app.use((req, res, next) => {
-    console.log('Response sent successfully!');
-  });
+  console.log('Request received!');
+  next();
+});
+
+app.use((req, res, next) => {
+  res.status(201);
+  next();
+});
+
+app.use((req, res, next) => {
+  res.json({ message: 'Your request was successful!' });
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log('Response sent successfully!');
+});
 
 module.exports = app;
+

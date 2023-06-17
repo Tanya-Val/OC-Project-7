@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../assets/logo_white.png';
 import corporate from '../assets/corporate.jpg';
 import './Signup.jsx'
 
 export default function LoginSignupPage() {
+    const[emailLog, setEmailLog] = useState('')
+    const[passwordLog, setPasswordLog] = useState('')
+
     return (
         <div>
             {/* Navbar */}
@@ -15,7 +18,7 @@ export default function LoginSignupPage() {
             <div className="LoginSignup--Main">
                 <div className="login-registration-block">
 
-                <div className="login-title">
+                    <div className="login-title">
                         <h2>Welcome back!</h2>
                     </div>
                     <form>
@@ -25,7 +28,10 @@ export default function LoginSignupPage() {
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                required />
+                                required
+                                onChange={(e) => {
+                                    setEmailLog(e.target.value)
+                                }} />
                         </div>
                         <div className="form-group">
                             <input
@@ -33,7 +39,10 @@ export default function LoginSignupPage() {
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"
-                                required />
+                                required 
+                                onChange={(e) => {
+                                    setPasswordLog(e.target.value)
+                                }}/>
                         </div>
 
                         <a href='/signup'>

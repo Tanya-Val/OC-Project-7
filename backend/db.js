@@ -1,32 +1,28 @@
+const express = require('express'); //
+const app = express(); //
+
 require('dotenv').config();
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
+const connection = mysql.createPool({connectionLimit: 10, host: '127.0.0.1', user: 'root', password: process.env.DB_PASSWORD, database: process.env.DB_NAME});
 
-const connection = mysql.createPool({
-  connectionLimit: 10,
-  host: '127.0.0.1',
-  user: 'root',
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+/*(async function updateOrCreateTables() {
+    try {
+        const pool = await connection.getConnection();
+        console.log('Successfully connected to MySQL.');
 
-(async function updateOrCreateTables() {
-  try {
-    const pool = await connection.getConnection();
-    console.log('Successfully connected to MySQL.');
+        // Check if the database exists
+        const [databaseRows] = await pool.query('SHOW DATABASES LIKE ?', [process.env.DB_NAME]);
+        if (databaseRows.length === 0) {
+            console.error(`Database "${process.env.DB_NAME}" does not exist.`);
+            return;
+        }
 
-    // Check if the database exists
-    const [databaseRows] = await pool.query('SHOW DATABASES LIKE ?', [process.env.DB_NAME]);
-    if (databaseRows.length === 0) {
-      console.error(`Database "${process.env.DB_NAME}" does not exist.`);
-      return;
-    }
-
-    // Create or update "users" table
-    const [usersRows] = await pool.query('SHOW TABLES LIKE "users"');
-    if (usersRows.length === 0) {
-      console.log('Creating users table...');
-      await pool.query(`
+        // Create or update "users" table
+        const [usersRows] = await pool.query('SHOW TABLES LIKE "users"');
+        if (usersRows.length === 0) {
+            console.log('Creating users table...');
+            await pool.query(`
       CREATE TABLE users (
         userID INT NOT NULL AUTO_INCREMENT,
         firstName VARCHAR(60) NOT NULL,
@@ -39,15 +35,15 @@ const connection = mysql.createPool({
         UNIQUE KEY email_UNIQUE (email)
       )
       `);
-    } else {
-      console.log('Users table already exists.');
-    }
+        } else {
+            console.log('Users table already exists.');
+        }
 
-    // Create or update "posts" table
-    const [postsRows] = await pool.query('SHOW TABLES LIKE "posts"');
-    if (postsRows.length === 0) {
-      console.log('Creating posts table...');
-      await pool.query(`
+        // Create or update "posts" table
+        const [postsRows] = await pool.query('SHOW TABLES LIKE "posts"');
+        if (postsRows.length === 0) {
+            console.log('Creating posts table...');
+            await pool.query(`
         CREATE TABLE posts (
           postID INT NOT NULL AUTO_INCREMENT,
           userID INT NOT NULL,
@@ -63,15 +59,15 @@ const connection = mysql.createPool({
           CONSTRAINT userID FOREIGN KEY (userID) REFERENCES users (userID)
         )
       `);
-    } else {
-      console.log('Posts table already exists.');
-    }
+        } else {
+            console.log('Posts table already exists.');
+        }
 
-    // Create or update "comments" table
-    const [commentsRows] = await pool.query('SHOW TABLES LIKE "comments"');
-    if (commentsRows.length === 0) {
-      console.log('Creating comments table...');
-      await pool.query(`
+        // Create or update "comments" table
+        const [commentsRows] = await pool.query('SHOW TABLES LIKE "comments"');
+        if (commentsRows.length === 0) {
+            console.log('Creating comments table...');
+            await pool.query(`
         CREATE TABLE comments (
           commentID INT NOT NULL AUTO_INCREMENT,
           postID INT NOT NULL,
@@ -89,17 +85,17 @@ const connection = mysql.createPool({
           CONSTRAINT fk_comments_users FOREIGN KEY (userID) REFERENCES users (userID)
         )
       `);
-    } else {
-      console.log('Comments table already exists.');
-    }
+        } else {
+            console.log('Comments table already exists.');
+        }
 
-    console.log('Tables "users", "posts", and "comments" updated or created successfully.');
-    pool.release();
-  } catch (error) {
-    console.error('Error updating or creating tables:', error);
-  } finally {
-    connection.end();
-  }
-})();
+        console.log('Tables "users", "posts", and "comments" updated or created successfully.');
+        pool.release();
+    } catch (error) {
+        console.error('Error updating or creating tables:', error);
+    } finally {
+        connection.end();
+    }
+})();*/
 
 module.exports = connection;

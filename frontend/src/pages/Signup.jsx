@@ -1,10 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo_white.png';
 import signUpimage from '../assets/signUp.jpg';
+import Axios from 'axios';
+
 
 
 
 export default function LoginSignupPage() {
+
+
+
+    const [firstNameReg, setFirstNameReg] = useState('');
+    const [lastNameReg, setLastNameReg] = useState('');
+    const [departmentReg, setDepartmentReg] = useState('');
+    const [emailReg, setEmailReg] = useState('');
+    const [passwordReg, setPasswordReg] = useState('');
+
+
+    const register = () => {
+        Axios.post('http://localhost:3000/signup', {
+            firstName: firstNameReg,
+            lastName: lastNameReg,
+            department: departmentReg,
+            email: emailReg,
+            password: passwordReg,
+        }).then((response) => {
+            console.log(response)
+        });
+    }
+
     return (
         <div>
             {/* Navbar */}
@@ -23,7 +47,12 @@ export default function LoginSignupPage() {
                                 id="firstName"
                                 name="firstName"
                                 placeholder="First name"
-                                required />
+                                required
+
+                                onChange={(e) => {
+                                    setFirstNameReg(e.target.value)
+                                }}
+                            />
                         </div>
 
                         <div className="form-group">
@@ -32,16 +61,28 @@ export default function LoginSignupPage() {
                                 id="lastName"
                                 name="lastName"
                                 placeholder="Last name"
-                                required />
+                                required
+
+                                onChange={(e) => {
+                                    setLastNameReg(e.target.value)
+                                }}
+
+                            />
                         </div>
 
                         <div className="form-group">
                             <input
-                                type="departament"
-                                id="departament"
-                                name="departament"
-                                placeholder="Departament"
-                                required />
+                                type="department"
+                                id="department"
+                                name="department"
+                                placeholder="Department"
+                                required
+
+                                onChange={(e) => {
+                                    setDepartmentReg(e.target.value)
+                                }}
+
+                            />
                         </div>
 
                         <div className="form-group">
@@ -50,7 +91,12 @@ export default function LoginSignupPage() {
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                required />
+                                required
+
+                                onChange={(e) => {
+                                    setEmailReg(e.target.value)
+                                }}
+                            />
                         </div>
 
                         <div className="form-group">
@@ -59,11 +105,16 @@ export default function LoginSignupPage() {
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"
-                                required />
+                                required
+
+                                onChange={(e) => {
+                                    setPasswordReg(e.target.value)
+                                }}
+                            />
                         </div>
 
                         <a href='/personalspace' >
-                            <button className="btn-account" type="button">Create Account
+                            <button onClick={register} className="btn-account" type="button">Create Account
                             </button>
                         </a>
 
@@ -71,7 +122,7 @@ export default function LoginSignupPage() {
                 </div>
 
                 <div className="login-registration-blockSignUp">
-                    <img className="corporateImage" id="signUpimage"src={signUpimage} alt="Corporate picture" />
+                    <img className="corporateImage" id="signUpimage" src={signUpimage} alt="Corporate picture" />
                 </div>
             </div>
         </div>
