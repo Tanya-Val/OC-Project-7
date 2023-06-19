@@ -27,14 +27,51 @@ app.post('/signup', (req, res) => {
     (err, result) => {
       if (err) {
         console.error('Error executing query:', err);
-        return res.status(500).json({ error: 'An error occurred while processing the request.' });
+        return res.status(500).json({
+          error: 'An error occurred while processing the request.'
+        });
       }
 
       console.log('Query executed successfully:', result);
-      res.json({ message: 'Signup successful!' });
+      res.json({
+        message: 'Signup successful!'
+      });
     }
   );
 });
+
+
+//--------
+
+app.post('/', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  connection.query(
+    "SELECT * FROM users WHERE password = ? AND email = ?",
+    [password, email], // Note the order of password and email in the array
+    (err, results) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        return res.status(500).json({
+          error: 'An error occurred while processing the request.'
+        });
+      }
+
+      if (results.length > 0) {
+        // User found, send the user data
+        res.json(results);
+      } else {
+        // User not found, send an error message
+        res.json({
+          message: 'WRONG COMB'
+        });
+      }
+    }
+  );
+});
+
+//-------
 
 app.use((req, res, next) => {
   console.log('Request received!');
@@ -47,7 +84,9 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.json({ message: 'Your request was successful!' });
+  res.json({
+    message: 'Your request was successful!'
+  });
   next();
 });
 
@@ -56,4 +95,3 @@ app.use((req, res, next) => {
 });
 
 module.exports = app;
-

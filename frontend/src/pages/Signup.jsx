@@ -6,9 +6,7 @@ import Axios from 'axios';
 
 
 
-export default function LoginSignupPage() {
-
-
+export default function SignupPage() {
 
     const [firstNameReg, setFirstNameReg] = useState('');
     const [lastNameReg, setLastNameReg] = useState('');
@@ -17,7 +15,9 @@ export default function LoginSignupPage() {
     const [passwordReg, setPasswordReg] = useState('');
 
 
-    const register = () => {
+    const register = (e) => {
+        e.preventDefault();
+
         Axios.post('http://localhost:3000/signup', {
             firstName: firstNameReg,
             lastName: lastNameReg,

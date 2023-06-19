@@ -2,10 +2,30 @@ import React, { useState } from 'react'
 import logo from '../assets/logo_white.png';
 import corporate from '../assets/corporate.jpg';
 import './Signup.jsx'
+import Axios from 'axios';
 
 export default function LoginSignupPage() {
-    const[emailLog, setEmailLog] = useState('')
-    const[passwordLog, setPasswordLog] = useState('')
+    const [emailLog, setEmailLog] = useState('')
+    const [passwordLog, setPasswordLog] = useState('')
+
+    const [loginStatus, setLoginStatus] = useState('');
+
+    const login = (e) => {
+        e.preventDefault();
+
+        Axios.post('http://localhost:3000/', {
+            email: emailLog,
+            password: passwordLog,
+        }).then((response) => {
+            if(response.data.message){
+                setLoginStatus(response.data.message)
+            } else {
+                setLoginStatus(response.data[0].email)
+            }
+            
+        });
+    }
+
 
     return (
         <div>
@@ -20,7 +40,11 @@ export default function LoginSignupPage() {
 
                     <div className="login-title">
                         <h2>Welcome back!</h2>
+                        <p> {loginStatus} </p>
                     </div>
+
+                    
+
                     <form>
                         <div className="form-group">
                             <input
@@ -39,19 +63,18 @@ export default function LoginSignupPage() {
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"
-                                required 
+                                required
                                 onChange={(e) => {
                                     setPasswordLog(e.target.value)
-                                }}/>
+                                }} />
                         </div>
 
-                        <a href='/signup'>
-                            <button className="btn-login" type="submit" >Login</button>
-                        </a>
-                        <a href='/signup'>
-                            <button className="btn-account" type="button">Create Account
-                            </button>
-                        </a>
+                        <button onClick={login} className="btn-login" type="button" >Login</button>
+
+
+                        <button className="btn-account" type="button">Create Account
+                        </button>
+
 
                     </form>
                 </div>
