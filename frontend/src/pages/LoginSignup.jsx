@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import logo from '../assets/logo_white.png';
-import corporate from '../assets/corporate.jpg';
 import './Signup.jsx'
 import Axios from 'axios';
 
@@ -17,12 +17,12 @@ export default function LoginSignupPage() {
             email: emailLog,
             password: passwordLog,
         }).then((response) => {
-            if(response.data.message){
+            if (response.data.message) {
                 setLoginStatus(response.data.message)
             } else {
                 setLoginStatus(response.data[0].email)
             }
-            
+
         });
     }
 
@@ -35,57 +35,43 @@ export default function LoginSignupPage() {
             </nav>
 
             {/* Main container */}
-            <div className="LoginSignup--Main">
-                <div className="login-registration-block">
+            <div className="Login">
+                <div className="LoginSignup--Main">
+                    <div className="login-form-container">
 
-                    <div className="login-title">
                         <h2>Welcome back!</h2>
                         <p> {loginStatus} </p>
-                    </div>
 
-                    
-
-                    <form>
-                        <div className="form-group">
+                        <form>
                             <input
                                 type="email"
-                                id="email"
-                                name="email"
                                 placeholder="Enter your email"
                                 required
                                 onChange={(e) => {
                                     setEmailLog(e.target.value)
                                 }} />
-                        </div>
-                        <div className="form-group">
+
                             <input
                                 type="password"
-                                id="password"
-                                name="password"
                                 placeholder="Enter your password"
                                 required
                                 onChange={(e) => {
                                     setPasswordLog(e.target.value)
                                 }} />
-                        </div>
-
-                        <button onClick={login} className="btn-login" type="button" >Login</button>
-
-
-                        <button className="btn-account" type="button">Create Account
-                        </button>
-
-
-                    </form>
-                </div>
-                <div className="login-registration-blockSignUp">
-                    <div className="titles">
-                        <h1>CONNECT-E</h1>
+                        </form>
+                        <button onClick={login} type="button" >Login</button>
                     </div>
-                    <img className="corporateImage" src={corporate} alt="Corporate picture" />
 
+                    <div className="login-image-container">
+                        <h1>CONNECT-E</h1>
+                        <p>Our company, a multinational retail corporation, is expanding by the day. We've grown by 100% over the
+                            last three years, and we now employ over 600 people.</p>
+                        <span>Join us now!</span>
+                        <Link to="/signup">
+                        <button type="button">Create Account</button>
+                        </Link>
+                    </div>
                 </div>
-
             </div>
         </div>
     )

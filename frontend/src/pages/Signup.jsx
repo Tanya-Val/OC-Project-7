@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import logo from '../assets/logo_white.png';
-import signUpimage from '../assets/signUp.jpg';
 import Axios from 'axios';
-
-
 
 
 export default function SignupPage() {
@@ -37,15 +35,24 @@ export default function SignupPage() {
             </nav>
 
             {/* Main container */}
-            <div className="LoginSignup--Main">
-                <div className="login-registration-block">
-                    <h1 className="login-registration-block-title">Sign-up</h1>
-                    <form>
-                        <div className="form-group">
+            <div className="Signup">
+
+                <div className="Signup--Main">
+
+                    <div className="Singup-image-container">
+                        <h1>CONNECT-E</h1>
+                        <span>Alredy have an account?</span>
+                        <Link to='/'>
+                            <button type="button">Login</button>
+                        </Link>
+                    </div>
+
+                    <div className="signup-form-container">
+
+                        <h2>Sign-up</h2>
+                        <form>
                             <input
                                 type="firstName"
-                                id="firstName"
-                                name="firstName"
                                 placeholder="First name"
                                 required
 
@@ -53,13 +60,9 @@ export default function SignupPage() {
                                     setFirstNameReg(e.target.value)
                                 }}
                             />
-                        </div>
 
-                        <div className="form-group">
                             <input
                                 type="lastName"
-                                id="lastName"
-                                name="lastName"
                                 placeholder="Last name"
                                 required
 
@@ -68,13 +71,9 @@ export default function SignupPage() {
                                 }}
 
                             />
-                        </div>
 
-                        <div className="form-group">
                             <input
                                 type="department"
-                                id="department"
-                                name="department"
                                 placeholder="Department"
                                 required
 
@@ -83,13 +82,9 @@ export default function SignupPage() {
                                 }}
 
                             />
-                        </div>
 
-                        <div className="form-group">
                             <input
                                 type="email"
-                                id="email"
-                                name="email"
                                 placeholder="Enter your email"
                                 required
 
@@ -97,13 +92,10 @@ export default function SignupPage() {
                                     setEmailReg(e.target.value)
                                 }}
                             />
-                        </div>
 
-                        <div className="form-group">
+
                             <input
                                 type="password"
-                                id="password"
-                                name="password"
                                 placeholder="Enter your password"
                                 required
 
@@ -111,20 +103,13 @@ export default function SignupPage() {
                                     setPasswordReg(e.target.value)
                                 }}
                             />
-                        </div>
+                        </form>
 
-                        <a href='/personalspace' >
-                            <button onClick={register} className="btn-account" type="button">Create Account
-                            </button>
-                        </a>
-
-                    </form>
-                </div>
-
-                <div className="login-registration-blockSignUp">
-                    <img className="corporateImage" id="signUpimage" src={signUpimage} alt="Corporate picture" />
+                        <button onClick={register} type="button">Create Account
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

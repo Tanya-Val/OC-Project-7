@@ -1,67 +1,26 @@
-@import "../layouts/nav--login-signup.scss";
+//@import "../layouts/nav--login-signup.scss";
 @import "../utils/variables.scss";
-// @import "../components/form--login-signup.scss";
+//@import "../components/form--login-signup.scss";
 //@import "../utils/resets.scss";
 
-
-.Signup {
+.Login {
     height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    .Signup--Main {
+
+    .LoginSignup--Main {
         display: flex;
         border: 1px solid $primary-color-grey;
         border-radius: 7px;
         width: 50%;
         min-height: 600px;
-       
-        .Singup-image-container {
-            border-radius: 7px 0 0 7px;
+        .login-form-container {
             flex: 1;
-            background: linear-gradient(#1225429a, #12254296),
-                url("https://images.pexels.com/photos/7971359/pexels-photo-7971359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
-                    center;
-            background-size: cover;
             padding: 50px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             gap: 50px;
-            color: white;
-            
-
-            h1 {
-                font-size: 55px;
-                
-            }
-
-            span {
-                font-size: 20px;
-            }
-
-            button {
-                width: 50%;
-                padding: 15px;
-                font-size: 20px;
-                border-radius: 7px;
-                border: 1px solid $primary-color-grey;
-                background-color: #d1515a;
-                color: white;
-                &:hover {
-                    box-shadow: 0 0 10px $primary-color-grey;
-                }
-                cursor: pointer;  
-            }
-        }
-
-        .signup-form-container {
-            flex: 1;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
             h2 {
                 color: $primary-color-blue;
                 font-size: 45px;
@@ -70,7 +29,7 @@
             form {
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 37px;
                 input {
                     padding: 20px;
                     border-radius: 7px;
@@ -85,7 +44,7 @@
 
             button {
                 width: 100%;
-                padding: 15px;
+                padding: 10px;
                 font-size: 20px;
                 border-radius: 7px;
                 border: 1px solid $primary-color-grey;
@@ -97,7 +56,45 @@
                 cursor: pointer;
             }
         }
+
+        .login-image-container {
+            border-radius: 0 7px 7px 0;
+            flex: 1;
+            background: linear-gradient(#1225429a, #12254296),
+                url("https://images.pexels.com/photos/3182765/pexels-photo-3182765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+                    center;
+            background-size: cover;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            color: white;
+
+            h1 {
+                font-size: 55px;
+            }
+
+            p {
+                font-size: 20px;
+            }
+
+            span {
+                font-size: 20px;
+            }
+
+            button {
+                width: 50%;
+                padding: 10px;
+                font-size: 20px;
+                border-radius: 7px;
+                border: 1px solid $primary-color-grey;
+                background-color: #d1515a;
+                color: white;
+                &:hover {
+                    box-shadow: 0 0 10px $primary-color-grey;
+                }
+                cursor: pointer;
+            }
+        }
     }
 }
-
-

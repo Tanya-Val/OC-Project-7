@@ -7,7 +7,7 @@ export default function Forum() {
     return (
         <div>
             {/* Navbar */}
-            <nav className="PersonaSpace--Nav">
+            {/* <nav className="PersonaSpace--Nav">
                 <img className="Login--Nav--Logo--personalpage" src={logo} alt="company logo" />
                 <div>
                     <a href="/forum">
@@ -23,7 +23,7 @@ export default function Forum() {
                             logout</span>
                     </a>
                 </div>
-            </nav>
+            </nav> */}
 
             {/* Main container */}
             <main className="Forum--Main">

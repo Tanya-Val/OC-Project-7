@@ -5,7 +5,7 @@ export default function PersonalSpacePage() {
     return (
         <div>
             {/* Navbar */}
-            <nav className="PersonaSpace--Nav">
+            {/* <nav className="PersonaSpace--Nav">
                 <img className="Login--Nav--Logo--personalpage" src={logo} alt="company logo"/>
                 <div>
                 <a href="/forum">
@@ -21,7 +21,7 @@ export default function PersonalSpacePage() {
                     logout</span>
                 </a>
                 </div>
-            </nav>
+            </nav> */}
 
             {/* Main container */}
             <div className="PersonalSpace--Main">
