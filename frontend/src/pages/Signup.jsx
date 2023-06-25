@@ -30,8 +30,12 @@ export default function SignupPage() {
     return (
         <div>
             {/* Navbar */}
-            <nav className="LoginSignup--Nav">
-                <img className="Login--Nav--Logo" src={logo} alt="company logo" />
+            <nav className="navbar">
+                <div className="left">
+                    <Link to='/forum'>
+                        <img src={logo} alt="company logo" />
+                    </Link>
+                </div>
             </nav>
 
             {/* Main container */}
