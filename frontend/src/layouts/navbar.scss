@@ -8,6 +8,8 @@
     background-color: #122542c0;
     height: 50px;
     border-bottom: 1px solid $primary-color-blue;
+    position: sticky;
+    top: 0;
     .left {
         img {
             height: auto;

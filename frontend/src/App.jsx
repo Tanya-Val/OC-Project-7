@@ -10,12 +10,14 @@ import PersonalSpace from './pages/PersonaSpace.jsx';
 import Forum from './pages/Forum.jsx';
 import Navbar from './layouts/Navbar.jsx';
 import { useContext } from 'react';
+import {AuthContext} from './context/authContext.jsx';
 
 
 function App() {
 
   //change to false for restriction 
-  const currentUser = true;
+  const currentUser = false;
+
 
   const Layout = () => {
     return (
@@ -77,16 +79,6 @@ function App() {
 
   return (
     <RouterProvider router={router} />
-    // <Router>
-    //   <div>
-    //     <Routes>
-    //       <Route path="/" element={<LoginSignup />} />
-    //       <Route path="/signup" element={<Signup />} />
-    //       <Route path="/personalspace" element={<PersonalSpace />} />
-    //       <Route path="/forum" element={<Forum />} />
-    //     </Routes>
-    //   </div>
-    // </Router>
   );
 }
 

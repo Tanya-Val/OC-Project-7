@@ -20,7 +20,6 @@ export default function Navbar() {
                 <div className="right">
                     <HomeRoundedIcon fontSize="large" sx={{ color: 'white' }} />
                     <AccountCircleRoundedIcon fontSize="large" sx={{ color: 'white' }} />
-                    <DarkModeRoundedIcon fontSize="large" sx={{ color: 'white' }} />
                     <div className='user'>
                         <img src="https://images.pexels.com/photos/3182765/pexels-photo-3182765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
                         <span>My name</span>
