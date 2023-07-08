@@ -1,5 +1,3 @@
-//file to change!
-
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();

@@ -1,7 +1,6 @@
 import React from 'react'
 import logo from '../assets/logo_white.png';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { Link } from 'react-router-dom';
@@ -28,7 +27,6 @@ export default function Navbar() {
                     <Link to='/'>
                         <LogoutRoundedIcon fontSize="large" sx={{ color: 'white' }} />
                     </Link>
-
 
                 </div>
             </nav>
