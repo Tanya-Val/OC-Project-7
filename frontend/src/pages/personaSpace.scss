@@ -1,9 +1,11 @@
 @import "../utils/variables.scss";
-@import "../components/form--personalSpace.scss";
+
 @import "../utils/resets.scss";
 
-.PersonalSpace--Main {
-    @include flex-center(row);
-    
-    height: 90vh;
+.personalSpace {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(245, 245, 245);
+    overflow-y: auto; 
+    height: 100vh;
 }

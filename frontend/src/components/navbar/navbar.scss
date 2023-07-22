@@ -1,19 +1,37 @@
-@import "../utils/variables.scss";
-
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 30px;
-    background-color: #122542c0;
+    background-color: #3b495e;
     height: 50px;
-    border-bottom: 1px solid $primary-color-blue;
-    position: sticky;
+    border-bottom: 1px solid #122542;
+    position: fixed;
     top: 0;
+    width: 100%;
     .left {
         img {
             height: auto;
             width: 250px;
+        }
+
+        .logoIcon{
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .logoIcon {
+                display: block;
+                height: auto;
+                width: 30px;
+                padding-top: 3px;
+            }
+        }
+
+        .logo {
+            @media (max-width: 480px) {
+                display: none;
+            }
         }
     }
 
@@ -21,6 +39,9 @@
         display: flex;
         align-items: center;
         gap: 40px;
+        @media (max-width: 480px) {
+            gap: 15px;
+        }
         .user {
             display: flex;
             align-items: center;

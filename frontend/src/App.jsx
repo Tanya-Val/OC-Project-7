@@ -1,22 +1,21 @@
 import './App.scss'
 import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from 'react-router-dom';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginSignup from './pages/LoginSignup.jsx';
 import Signup from './pages/Signup.jsx';
 import PersonalSpace from './pages/PersonaSpace.jsx';
 import Forum from './pages/Forum.jsx';
-import Navbar from './layouts/Navbar.jsx';
+import Navbar from './components/navbar/Navbar.jsx';
 import { useContext } from 'react';
-
+import { AuthContext } from './context/authContext.jsx'; // Import the AuthContext
 
 function App() {
 
-  //change to false for restriction 
-  const currentUser = true;
+  //change to false for restriction TEST
+  //const currentUser = false;
 
+  // Access the currentUser from AuthContext
+  const { currentUser } = useContext(AuthContext); 
 
   const Layout = () => {
     return (
@@ -75,10 +74,8 @@ function App() {
     },
   ]);
 
-
   return (
     <RouterProvider router={router} />
-    
   );
 }
 
