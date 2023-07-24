@@ -56,33 +56,33 @@ app.use("/api/comments", commentRoutes);
 
 //--------
 
-app.post('/', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+// app.post('/', (req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
 
-  connection.query(
-    "SELECT * FROM users WHERE password = ? AND email = ?",
-    [password, email], // Note the order of password and email in the array
-    (err, results) => {
-      if (err) {
-        console.error('Error executing query:', err);
-        return res.status(500).json({
-          error: 'An error occurred while processing the request.'
-        });
-      }
+//   connection.query(
+//     "SELECT * FROM users WHERE password = ? AND email = ?",
+//     [password, email], // Note the order of password and email in the array
+//     (err, results) => {
+//       if (err) {
+//         console.error('Error executing query:', err);
+//         return res.status(500).json({
+//           error: 'An error occurred while processing the request.'
+//         });
+//       }
 
-      if (results.length > 0) {
-        // User found, send the user data
-        res.json(results);
-      } else {
-        // User not found, send an error message
-        res.json({
-          message: 'WRONG COMB'
-        });
-      }
-    }
-  );
-});
+//       if (results.length > 0) {
+//         // User found, send the user data
+//         res.json(results);
+//       } else {
+//         // User not found, send an error message
+//         res.json({
+//           message: 'WRONG COMB'
+//         });
+//       }
+//     }
+//   );
+// });
 
 //-------
 
@@ -91,17 +91,17 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.status(201);
-  next();
-});
+// app.use((req, res, next) => {
+//   res.status(201);
+//   next();
+// });
 
-app.use((req, res, next) => {
-  res.json({
-    message: 'Your request was successful!'
-  });
-  next();
-});
+// app.use((req, res, next) => {
+//   res.json({
+//     message: 'Your request was successful!'
+//   });
+//   next();
+// });
 
 app.use((req, res, next) => {
   console.log('Response sent successfully!');

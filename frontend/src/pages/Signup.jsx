@@ -5,77 +5,43 @@ import Axios from 'axios';
 import { AuthContext } from '../context/authContext.jsx'; // Import the AuthContext
 
 export default function SignupPage() {
-  const [firstNameReg, setFirstNameReg] = useState('');
-  const [lastNameReg, setLastNameReg] = useState('');
-  const [departmentReg, setDepartmentReg] = useState('');
-  const [emailReg, setEmailReg] = useState('');
-  const [passwordReg, setPasswordReg] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
-  const register = (e) => {
-    e.preventDefault();
-    Axios.post('http://localhost:3000/api/auth/signup', {
-      firstName: firstNameReg,
-      lastName: lastNameReg,
-      department: departmentReg,
-      email: emailReg,
-      password: passwordReg,
-    })
-      .then((response) => {
-        console.log(response);
-        // Registration successful
-        // Redirect to another page or show a success message
-      })
-      .catch((error) => {
-        // Handle errors here
-        if (error.response && error.response.status === 409) {
-          // User already exists, set the error message
-          setErrorMessage(error.response.data.error);
-        } else {
-          // Other errors, set a generic error message
-          setErrorMessage('An error occurred during registration.');
-        }
-        console.error(error);
-      });
-  };
+  // const [inputs, setInputs] = useState({
+  //   firstNameReg: "",
+  //   lastNameReg: "",
+  //   departmentReg: "",
+  //   emailReg: "",
+  //   passwordReg: "",
+  // })
 
 
-  // const [firstNameReg, setFirstNameReg] = useState('');
-  // const [lastNameReg, setLastNameReg] = useState('');
-  // const [departmentReg, setDepartmentReg] = useState('');
-  // const [emailReg, setEmailReg] = useState('');
-  // const [passwordReg, setPasswordReg] = useState('');
+  // const handleChange = (e) => {
+  //   setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // };
 
-  // const { login } = useContext(AuthContext); // Access the login function from AuthContext
-  // const navigate = useNavigate(); // Use navigate from react-router-dom to redirect
+  // const [err, setErr] = useState(null);
 
-  // const register = (e) => {
+
+  // const handleClick = async (e) => {
   //   e.preventDefault();
 
-  //   Axios.post('http://localhost:3000/signup', {
-  //     firstName: firstNameReg,
-  //     lastName: lastNameReg,
-  //     department: departmentReg,
-  //     email: emailReg,
-  //     password: passwordReg,
-  //   }).then((response) => {
-  //     console.log(response);
-  //     if (response.status === 200) {
-  //       // Registration successful
-  //       login(); // Call the login function to update the currentUser in AuthContext
-  //       navigate('/forum'); // Redirect to the /forum page
-  //     }
-  //   });
+  //   try {
+  //     await Axios.post("http://localhost:3000/api/auth/signup", inputs);
+  //   } catch (err) {
+  //     setErr(err.response.data);
+  //   }
   // };
+
+  // console.log(err)
+
+
 
   return (
     <div>
 
-<div>
-      {/* ... Rest of the JSX code ... */}
-      {/* Display the error message if it exists */}
-      {errorMessage && <div>{errorMessage}</div>}
-    </div>
+      <div>
+
+      </div>
       {/* Navbar */}
       <nav className="navbar">
         <div className="left">
@@ -100,52 +66,47 @@ export default function SignupPage() {
             <h2>Sign-up</h2>
             <form>
               <input
-                type="firstName"
+                type="text"
                 placeholder="First name"
                 required
-                onChange={(e) => {
-                  setFirstNameReg(e.target.value)
-                }}
+                name="firstNameReg"
+                //onChange={handleChange}
               />
 
               <input
-                type="lastName"
+                type="text"
                 placeholder="Last name"
                 required
-                onChange={(e) => {
-                  setLastNameReg(e.target.value)
-                }}
+                name="lastNameReg"
+                //onChange={handleChange}
               />
 
               <input
-                type="department"
+                type="text"
                 placeholder="Department"
                 required
-                onChange={(e) => {
-                  setDepartmentReg(e.target.value)
-                }}
+                name="departmentReg"
+                //onChange={handleChange}
               />
 
               <input
                 type="email"
                 placeholder="Enter your email"
                 required
-                onChange={(e) => {
-                  setEmailReg(e.target.value)
-                }}
+                name="emailReg"
+                //onChange={handleChange}
               />
 
               <input
                 type="password"
                 placeholder="Enter your password"
                 required
-                onChange={(e) => {
-                  setPasswordReg(e.target.value)
-                }}
+                name="passwordReg"
+                //onChange={handleChange}
               />
             </form>
 
-            <button onClick={register} type="button">Create Account</button>
+            <button /*onClick={handleClick}*/ type="button">Create Account</button>
           </div>
         </div>
       </div>
