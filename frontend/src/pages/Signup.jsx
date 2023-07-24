@@ -6,33 +6,33 @@ import { AuthContext } from '../context/authContext.jsx'; // Import the AuthCont
 
 export default function SignupPage() {
 
-  // const [inputs, setInputs] = useState({
-  //   firstNameReg: "",
-  //   lastNameReg: "",
-  //   departmentReg: "",
-  //   emailReg: "",
-  //   passwordReg: "",
-  // })
+  const [inputs, setInputs] = useState({
+    firstName: "",
+    lastName: "",
+    department: "",
+    email: "",
+    password: "",
+  })
 
 
-  // const handleChange = (e) => {
-  //   setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  // };
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  // const [err, setErr] = useState(null);
+  const [err, setErr] = useState(null);
 
 
-  // const handleClick = async (e) => {
-  //   e.preventDefault();
+  const handleClick = async (e) => {
+    e.preventDefault();
 
-  //   try {
-  //     await Axios.post("http://localhost:3000/api/auth/signup", inputs);
-  //   } catch (err) {
-  //     setErr(err.response.data);
-  //   }
-  // };
+    try {
+      await Axios.post("http://localhost:3000/api/auth/signup", inputs);
+    } catch (err) {
+      setErr(err.response.data);
+    }
+  };
 
-  // console.log(err)
+  console.log(err)
 
 
 
@@ -69,44 +69,44 @@ export default function SignupPage() {
                 type="text"
                 placeholder="First name"
                 required
-                name="firstNameReg"
-                //onChange={handleChange}
+                name="firstName"
+                onChange={handleChange}
               />
 
               <input
                 type="text"
                 placeholder="Last name"
                 required
-                name="lastNameReg"
-                //onChange={handleChange}
+                name="lastName"
+                onChange={handleChange}
               />
 
               <input
                 type="text"
                 placeholder="Department"
                 required
-                name="departmentReg"
-                //onChange={handleChange}
+                name="department"
+                onChange={handleChange}
               />
 
               <input
                 type="email"
                 placeholder="Enter your email"
                 required
-                name="emailReg"
-                //onChange={handleChange}
+                name="email"
+                onChange={handleChange}
               />
 
               <input
                 type="password"
                 placeholder="Enter your password"
                 required
-                name="passwordReg"
-                //onChange={handleChange}
+                name="password"
+                onChange={handleChange}
               />
             </form>
 
-            <button /*onClick={handleClick}*/ type="button">Create Account</button>
+            <button onClick={handleClick} type="button">Create Account</button>
           </div>
         </div>
       </div>

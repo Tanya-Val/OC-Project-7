@@ -4,10 +4,12 @@ const jwt = require("jsonwebtoken");
 
 
 exports.register = (req, res) => {
+
+
     // Check user in the database
     const selectQuery = "SELECT * FROM users WHERE email = ?";
-    
-    
+
+
     connection.query(selectQuery, [req.body.email], (err, data) => {
         if (err) return res.status(500).json(err);
         if (data.length) return res.status(409).json("User already exists");
@@ -19,7 +21,6 @@ exports.register = (req, res) => {
         console.log('req.body.password:', req.body.password);
         console.log('salt:', salt);
 
-    
         const insertQuery = "INSERT INTO users (firstName, lastName, department, email, password) VALUES (?)";
 
 
@@ -34,11 +35,10 @@ exports.register = (req, res) => {
         connection.query(insertQuery, [values], (err, data) => {
             if (err) return res.status(500).json(err);
             return res.status(200).json("User has been created.");
-          });
+        });
     });
-
-    console.log('req.body:', req.body);
-
+    
+    
 };
 
 
