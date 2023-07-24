@@ -10,31 +10,72 @@ export default function SignupPage() {
   const [departmentReg, setDepartmentReg] = useState('');
   const [emailReg, setEmailReg] = useState('');
   const [passwordReg, setPasswordReg] = useState('');
-
-  const { login } = useContext(AuthContext); // Access the login function from AuthContext
-  const navigate = useNavigate(); // Use navigate from react-router-dom to redirect
+  const [errorMessage, setErrorMessage] = useState('');
 
   const register = (e) => {
     e.preventDefault();
-  
-    Axios.post('http://localhost:3000/signup', {
+    Axios.post('http://localhost:3000/api/auth/signup', {
       firstName: firstNameReg,
       lastName: lastNameReg,
       department: departmentReg,
       email: emailReg,
       password: passwordReg,
-    }).then((response) => {
-      console.log(response);
-      if (response.status === 200) {
+    })
+      .then((response) => {
+        console.log(response);
         // Registration successful
-        login(); // Call the login function to update the currentUser in AuthContext
-        navigate('/forum'); // Redirect to the /forum page
-      }
-    });
+        // Redirect to another page or show a success message
+      })
+      .catch((error) => {
+        // Handle errors here
+        if (error.response && error.response.status === 409) {
+          // User already exists, set the error message
+          setErrorMessage(error.response.data.error);
+        } else {
+          // Other errors, set a generic error message
+          setErrorMessage('An error occurred during registration.');
+        }
+        console.error(error);
+      });
   };
+
+
+  // const [firstNameReg, setFirstNameReg] = useState('');
+  // const [lastNameReg, setLastNameReg] = useState('');
+  // const [departmentReg, setDepartmentReg] = useState('');
+  // const [emailReg, setEmailReg] = useState('');
+  // const [passwordReg, setPasswordReg] = useState('');
+
+  // const { login } = useContext(AuthContext); // Access the login function from AuthContext
+  // const navigate = useNavigate(); // Use navigate from react-router-dom to redirect
+
+  // const register = (e) => {
+  //   e.preventDefault();
+
+  //   Axios.post('http://localhost:3000/signup', {
+  //     firstName: firstNameReg,
+  //     lastName: lastNameReg,
+  //     department: departmentReg,
+  //     email: emailReg,
+  //     password: passwordReg,
+  //   }).then((response) => {
+  //     console.log(response);
+  //     if (response.status === 200) {
+  //       // Registration successful
+  //       login(); // Call the login function to update the currentUser in AuthContext
+  //       navigate('/forum'); // Redirect to the /forum page
+  //     }
+  //   });
+  // };
 
   return (
     <div>
+
+<div>
+      {/* ... Rest of the JSX code ... */}
+      {/* Display the error message if it exists */}
+      {errorMessage && <div>{errorMessage}</div>}
+    </div>
       {/* Navbar */}
       <nav className="navbar">
         <div className="left">

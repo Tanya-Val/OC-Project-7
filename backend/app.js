@@ -3,7 +3,15 @@ const app = express();
 const cors = require('cors');
 const connection = require('./db.js');
 
+const authRoutes = require('./routes/auth.js');
+const userRoutes = require('./routes/user.js');
+const postRoutes = require('./routes/post.js');
+const commentRoutes = require('./routes/comment.js');
+
+//middlewares
 app.use(express.json());
+
+
 app.use(cors());
 
 // Allows Cross-Origin Resource Sharing (CORS) for all requests
@@ -14,31 +22,36 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/signup', (req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const department = req.body.department;
-  const email = req.body.email;
-  const password = req.body.password;
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
-  connection.query(
-    "INSERT INTO users (firstName, lastName, department, email, password) VALUES (?, ?, ?, ?, ?)",
-    [firstName, lastName, department, email, password],
-    (err, result) => {
-      if (err) {
-        console.error('Error executing query:', err);
-        return res.status(500).json({
-          error: 'An error occurred while processing the request.'
-        });
-      }
+// app.post('/signup', (req, res) => {
+//   const firstName = req.body.firstName;
+//   const lastName = req.body.lastName;
+//   const department = req.body.department;
+//   const email = req.body.email;
+//   const password = req.body.password;
 
-      console.log('Query executed successfully:', result);
-      res.json({
-        message: 'Signup successful!'
-      });
-    }
-  );
-});
+//   connection.query(
+//     "INSERT INTO users (firstName, lastName, department, email, password) VALUES (?, ?, ?, ?, ?)",
+//     [firstName, lastName, department, email, password],
+//     (err, result) => {
+//       if (err) {
+//         console.error('Error executing query:', err);
+//         return res.status(500).json({
+//           error: 'An error occurred while processing the request.'
+//         });
+//       }
+
+//       console.log('Query executed successfully:', result);
+//       res.json({
+//         message: 'Signup successful!'
+//       });
+//     }
+//   );
+// });
 
 
 //--------
