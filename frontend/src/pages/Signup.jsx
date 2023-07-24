@@ -105,7 +105,7 @@ export default function SignupPage() {
                 onChange={handleChange}
               />
             </form>
-
+            {err && err}
             <button onClick={handleClick} type="button">Create Account</button>
           </div>
         </div>
