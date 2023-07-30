@@ -4,6 +4,7 @@ import logo from '../assets/logo_white.png';
 import Axios from 'axios';
 import { AuthContext } from '../context/authContext.jsx'; // Import the AuthContext
 
+
 export default function SignupPage() {
 
   const [inputs, setInputs] = useState({
@@ -12,8 +13,10 @@ export default function SignupPage() {
     department: "",
     email: "",
     password: "",
-  })
+  });
 
+  const { login } = useContext(AuthContext); // Destructure the login function
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -21,19 +24,21 @@ export default function SignupPage() {
 
   const [err, setErr] = useState(null);
 
-
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
       await Axios.post("http://localhost:3000/api/auth/signup", inputs);
+      // Call the login function after successful signup
+      await login({ email: inputs.email, password: inputs.password });
+      // Redirect to /forum after successful signup and login
+      navigate('/forum');
     } catch (err) {
       setErr(err.response.data);
     }
   };
 
-  console.log(err)
-
+  console.log(err);
 
 
   return (
