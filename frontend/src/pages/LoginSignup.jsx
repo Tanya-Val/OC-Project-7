@@ -5,32 +5,28 @@ import Axios from 'axios';
 import { AuthContext } from '../context/authContext.jsx'; // Import the AuthContext
 
 export default function LoginSignupPage() {
-  const [emailLog, setEmailLog] = useState('')
-  const [passwordLog, setPasswordLog] = useState('')
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+  const [err, setErr] = useState(null);
 
-  const { login } = useContext(AuthContext); // Access the login function from AuthContext
-  const navigate = useNavigate(); // Use navigate from react-router-dom to redirect
+  const navigate = useNavigate()
 
-  const [loginStatus, setLoginStatus] = useState('');
-
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const { login } = useContext(AuthContext);
 
-    login(
-        Axios.post('http://localhost:3000/', {
-            email: emailLog,
-            password: passwordLog,
-          }).then((response) => {
-            if (response.data.message) {
-              setLoginStatus(response.data.message);
-            } else {
-              setLoginStatus(response.data[0].email);
-              login(); // Call the login function to update the currentUser in AuthContext
-              navigate('/forum'); // Redirect to the /forum page
-            }
-          })
-    );
-    
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(inputs);
+      navigate("/")
+    } catch (err) {
+      setErr(err.response.data);
+    };
   };
 
   return (
@@ -49,24 +45,22 @@ export default function LoginSignupPage() {
         <div className="LoginSignup--Main">
           <div className="login-form-container">
             <h2>Welcome back!</h2>
-            <p> {loginStatus} </p>
+            {/* <p> {loginStatus} </p> */}
             <form>
               <input
                 type="email"
                 placeholder="Enter your email"
                 required
-                onChange={(e) => {
-                  setEmailLog(e.target.value)
-                }}
+                name="email"
+              onChange={handleChange}
               />
 
               <input
                 type="password"
                 placeholder="Enter your password"
                 required
-                onChange={(e) => {
-                  setPasswordLog(e.target.value)
-                }}
+                name="password"
+              onChange={handleChange}
               />
             </form>
             <button onClick={handleLogin} type="button">Login</button>
