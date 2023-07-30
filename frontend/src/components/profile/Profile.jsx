@@ -11,9 +11,14 @@ export default function profile() {
     return (
         <div className="profile">
 
-            <img src="https://images.pexels.com/photos/2598024/pexels-photo-2598024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" className="profilePicture" />
+            <img
+                src={currentUser.profilePicture}
+                alt=""
+                className="profilePicture"
+            />
 
-            <span> My name </span>
+            <span> {currentUser.firstName} {" "}
+                {currentUser.lastName} </span>
 
             <div className="form-container">
                 <p>Change your personal data</p>

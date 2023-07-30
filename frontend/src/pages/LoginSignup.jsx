@@ -11,7 +11,7 @@ export default function LoginSignupPage() {
   });
   const [err, setErr] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function LoginSignupPage() {
     e.preventDefault();
     try {
       await login(inputs);
-      navigate("/")
+      navigate("/forum")
     } catch (err) {
       setErr(err.response.data);
     };

@@ -6,7 +6,12 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { Link } from 'react-router-dom';
 
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext.jsx'; // Import the AuthContext
+
 export default function Navbar() {
+
+    const { currentUser } = useContext(AuthContext);
     return (
         <div>
             {/* Navbar */}
@@ -36,8 +41,13 @@ export default function Navbar() {
 
 
                     <div className='user'>
-                        <img src="https://images.pexels.com/photos/3182765/pexels-photo-3182765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
-                        <span>My name</span>
+                        <img
+                            src={currentUser.profilePicture}
+                            alt=""
+                        />
+                        <span>{currentUser.firstName} {" "}
+                            {currentUser.lastName}
+                        </span>
                     </div>
 
                     <Link to='/'>
