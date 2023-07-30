@@ -1,11 +1,9 @@
 
 @import "../utils/variables.scss";
-// @import "../components/form--login-signup.scss";
-//@import "../utils/resets.scss";
-
 
 .Signup {
-    height: 90vh;
+    height: 80vh;
+    margin-top: 13vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,7 +13,7 @@
         border: 1px solid $primary-color-grey;
         border-radius: 7px;
         width: 50%;
-        min-height: 600px;
+        max-height: 500px;
        
         .Singup-image-container {
             border-radius: 7px 0 0 7px;
@@ -33,7 +31,7 @@
             
 
             h1 {
-                font-size: 55px;
+                font-size: 40px;
                 
             }
 
@@ -44,7 +42,7 @@
             button {
                 width: 50%;
                 padding: 15px;
-                font-size: 20px;
+                font-size: 16px;
                 border-radius: 7px;
                 border: 1px solid $primary-color-grey;
                 background-color: #d1515a;
@@ -58,13 +56,16 @@
 
         .signup-form-container {
             flex: 1;
-            padding: 50px;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 30px;
+            padding-bottom: 30px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             h2 {
                 color: $primary-color-blue;
-                font-size: 45px;
+                font-size: 35px;
             }
 
             form {
@@ -72,10 +73,10 @@
                 flex-direction: column;
                 gap: 20px;
                 input {
-                    padding: 20px;
+                    padding: 10px;
                     border-radius: 7px;
                     border: 1px solid $primary-color-grey;
-                    font-size: 16px;
+                    font-size: 14px;
                     &:focus {
                         outline: none;
                         box-shadow: inset 0 -1px 0 $primary-color-blue;
@@ -85,8 +86,8 @@
 
             button {
                 width: 100%;
-                padding: 15px;
-                font-size: 20px;
+                padding: 10px;
+                font-size: 16px;
                 border-radius: 7px;
                 border: 1px solid $primary-color-grey;
                 background-color: $primary-color-blue;

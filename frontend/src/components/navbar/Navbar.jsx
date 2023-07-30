@@ -27,18 +27,16 @@ export default function Navbar() {
                 <div className="right">
 
                     <Link to='/forum'>
-                        <HomeRoundedIcon fontSize="large" sx={{ color: 'white' }} />
+                        <HomeRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
                     </Link>
 
                     <Link to='/personalspace/:id'>
-                        <AccountCircleRoundedIcon fontSize="large" sx={{ color: 'white' }} />
+                        <AccountCircleRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
                     </Link>
 
                     <Link to='/signup'>
-                        <LogoutRoundedIcon fontSize="large" sx={{ color: 'white' }} />
+                        <LogoutRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
                     </Link>
-
-
 
                     <div className='user'>
                         <img
@@ -49,11 +47,6 @@ export default function Navbar() {
                             {currentUser.lastName}
                         </span>
                     </div>
-
-                    <Link to='/'>
-                        <LogoutRoundedIcon fontSize="large" sx={{ color: 'white' }} />
-                    </Link>
-
                 </div>
             </nav>
         </div>
