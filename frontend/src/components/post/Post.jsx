@@ -23,10 +23,10 @@ export default function Post({ post }) {
 
                         <img src={post.profilePicture} alt="profilePicture" />
                         <div className="details" >
-                            <Link to={`/personalspace/${post.userID}`} style={{ textDecoration: "none" }}>
+                             <Link to={`/personalspace/${post.userID}`} style={{ textDecoration: "none" }}>
                                 <span className="name">{post.firstName} {post.lastName}</span>
 
-                            </Link>
+                            </Link> 
                             <span className="date"> 1 min ago </span>
                         </div>
 

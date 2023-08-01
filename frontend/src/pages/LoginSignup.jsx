@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/logo_white.png';
-import Axios from 'axios';
 import { AuthContext } from '../context/authContext.jsx'; // Import the AuthContext
 
 export default function LoginSignupPage() {

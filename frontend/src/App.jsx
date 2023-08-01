@@ -8,6 +8,10 @@ import Forum from './pages/Forum.jsx';
 import Navbar from './components/navbar/Navbar.jsx';
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext.jsx'; // Import the AuthContext
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+
+const queryClient = new QueryClient()
 
 function App() {
 
@@ -15,14 +19,17 @@ function App() {
   //const currentUser = false;
 
   // Access the currentUser from AuthContext
-  const { currentUser } = useContext(AuthContext); 
+  const { currentUser } = useContext(AuthContext);
+
 
   const Layout = () => {
     return (
-      <div>
-        <Navbar />
-        <Outlet />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div>
+          <Navbar />
+          <Outlet />
+        </div>
+      </QueryClientProvider>
     );
   };
 
