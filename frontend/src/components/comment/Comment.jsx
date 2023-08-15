@@ -1,33 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Comment.scss"
 import { useContext } from 'react';
 import {AuthContext} from "../../context/authContext.jsx"
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { makeRequest } from '../../axios';
+import moment from 'moment';
 
 
-export default function Comment() {
+export default function Comment({postID}) {
 
+    const [comment, setComment] = useState("");
     const {currentUser} = useContext (AuthContext);
-    //Temporary
-    const comments = [
-        {
-            postID: 1,
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nequeaspernatur ullam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nequeaspernatur ullam aperiam",
-            firstName: "Tat1",
-            lastName: "Val1",
-            userID: 1,
-            profilePicture:
-                "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-        {
-            postID: 2,
-            desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nequeaspernatur ullam aperiam",
-            firstName: "Tat2",
-            lastName: "Val2",
-            userID: 2,
-            profilePicture:
-                "https://images.pexels.com/photos/3170635/pexels-photo-3170635.jpeg",
-        },
-    ];
+
+    const { isLoading, error, data } = useQuery(['comments', postID], () =>
+    makeRequest.get("/comments?postID="+postID).then((res) => {
+      return res.data;
+    })
+  );
+
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (newComment) => {
+      return makeRequest.post("/comments", newComment)
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["comments"])
+      },
+    })
+
+
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    
+    mutation.mutate({ comment, postID: postID });
+    setComment("");
+
+    console.log(comment)
+    
+  };
+
+
+
 
     return (
         <div className="comments">
@@ -36,18 +53,20 @@ export default function Comment() {
             <div className="write">
                 {/*image will be fixed after auth context*/}
                 <img src={currentUser.profilePicture} alt="" />
-                <input type="text" placeholder = "Write a comment" />
-                <button>Send</button>
+                <input type="text" placeholder = "Write a comment" 
+                value={comment}
+                onChange ={(e)=> setComment(e.target.value)} />
+                <button onClick={handleClick}>Send</button>
 
             </div>
-            {comments.map((comment) => (
-                <div className="comment" key={comment.postID}>
+            { isLoading? "loading" : data.map((comment) => (
+                <div className="comment" key={comment.commentID}>
                     <img src={comment.profilePicture} alt="" />
                     <div className="info">
                         <span> {comment.firstName} {comment.lastName} </span>
-                        <p> {comment.desc} </p>
+                        <p> {comment.comment} </p>
                     </div>
-                    <span className="time">1 hour ago</span>
+                    <span className="time">{moment(comment.createdAt).fromNow()}</span>
                 </div>
 
             ))}

@@ -6,6 +6,7 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import Comment from '../comment/Comment';
+import moment from 'moment';
 
 
 export default function Post({ post }) {
@@ -27,7 +28,7 @@ export default function Post({ post }) {
                                 <span className="name">{post.firstName} {post.lastName}</span>
 
                             </Link> 
-                            <span className="date"> 1 min ago </span>
+                            <span className="date"> {moment(post.createdAt).fromNow()} </span>
                         </div>
 
                     </div>
@@ -50,7 +51,7 @@ export default function Post({ post }) {
                     </div>
 
                 </div>
-                {commentOpen && <Comment/>}
+                {commentOpen && <Comment key={post.postID} postID={post.postID}/>}
 
             </div>
         </div>
