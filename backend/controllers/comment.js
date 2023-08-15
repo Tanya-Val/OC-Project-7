@@ -5,7 +5,7 @@ const connection = require('../db.js');
 
 exports.getComments = (req, res) => {
 
-    const postsQuery = `SELECT comments.*, users.firstName, users.lastName, users.profilePicture 
+    const commentsQuery = `SELECT comments.*, users.firstName, users.lastName, users.profilePicture 
     FROM comments 
     JOIN users ON comments.userID = users.userID 
     WHERE comments.postID = ? 
@@ -14,13 +14,13 @@ exports.getComments = (req, res) => {
 
       
 
-    connection.query(postsQuery, [req.query.postID], (err, data) => {
+    connection.query(commentsQuery, [req.query.postID], (err, data) => {
         if (err) {
-            console.error('Error occurred while fetching posts:', err);
+            console.error('Error occurred while fetching comment:', err);
             return res.status(500).json(err);
         }
 
-        console.log('Posts fetched successfully:', data);
+        console.log('Comment fetched successfully:', data);
 
         return res.status(200).json(data);
     });
