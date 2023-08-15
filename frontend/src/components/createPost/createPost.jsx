@@ -63,8 +63,8 @@ export default function createPost() {
             />
             <input type="text"
               placeholder={`What's on your mind ${currentUser.firstName}?`}
-              onChange={(e) => setDesc(e.target.value)} />
-
+              onChange={(e) => setDesc(e.target.value)} 
+              value={desc}/>
           </div>
 
           <div className="right">
