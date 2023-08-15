@@ -14,10 +14,13 @@ export default function Comment({postID}) {
 
     const { isLoading, error, data } = useQuery(['comments', postID], () =>
     makeRequest.get("/comments?postID="+postID).then((res) => {
+      
       return res.data;
     })
   );
 
+
+  
 
   const queryClient = useQueryClient();
 
@@ -66,7 +69,7 @@ export default function Comment({postID}) {
                         <span> {comment.firstName} {comment.lastName} </span>
                         <p> {comment.comment} </p>
                     </div>
-                    <span className="time">{moment(comment.createdAt).fromNow()}</span>
+                    <span className="time">{moment(comment.created_date).fromNow()}</span>
                 </div>
 
             ))}

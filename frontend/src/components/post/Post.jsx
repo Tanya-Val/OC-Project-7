@@ -16,6 +16,8 @@ export default function Post({ post }) {
     //TEMPORARU FUNCTION
     const liked = false;
 
+    
+
     return (
         <div className="post">
             <div className="container">
@@ -28,7 +30,7 @@ export default function Post({ post }) {
                                 <span className="name">{post.firstName} {post.lastName}</span>
 
                             </Link> 
-                            <span className="date"> {moment(post.createdAt).fromNow()} </span>
+                            <span className="date"> {moment(post.created_date).fromNow()} </span>
                         </div>
 
                     </div>
