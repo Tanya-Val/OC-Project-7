@@ -8,6 +8,8 @@ const authRoutes = require('./routes/auth.js');
 const userRoutes = require('./routes/user.js');
 const postRoutes = require('./routes/forum.js');
 const commentRoutes = require('./routes/comment.js');
+const likesRoutes = require('./routes/likes.js');
+
 
 const multer  = require('multer');
 
@@ -50,6 +52,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/forum', postRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/likes', likesRoutes);
 
 app.use((req, res, next) => {
   console.log('Request received!');

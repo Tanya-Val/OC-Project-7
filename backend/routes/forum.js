@@ -1,3 +1,4 @@
+//forum.js routes
 const express = require('express');
 const router = express.Router();
 const { getPosts, addPost } = require('../controllers/post.js');

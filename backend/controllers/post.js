@@ -1,3 +1,4 @@
+//post.js controllers
 const moment = require('moment');
 const jwt = require('jsonwebtoken');
 
@@ -23,7 +24,7 @@ exports.getPosts = (req, res) => {
         return res.status(500).json(err);
       }
 
-      console.log('Posts fetched successfully:', data);
+      //console.log('Posts fetched successfully:', data);
 
       return res.status(200).json(data);
     });

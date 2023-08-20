@@ -11,16 +11,13 @@ exports.getComments = (req, res) => {
     WHERE comments.postID = ? 
     ORDER BY comments.created_date DESC;`;
 
-
-      
-
     connection.query(commentsQuery, [req.query.postID], (err, data) => {
         if (err) {
             console.error('Error occurred while fetching comment:', err);
             return res.status(500).json(err);
         }
 
-        console.log('Comment fetched successfully:', data);
+        //console.log('Comment fetched successfully:', data);
 
         return res.status(200).json(data);
     });
