@@ -10,6 +10,7 @@ import { AuthContext } from '../../context/authContext.jsx';
 
 export default function Navbar() {
   const { currentUser, logout } = useContext(AuthContext);
+  
 
   const handleLogout = () => {
     logout(); // Call the logout function from AuthContext
@@ -32,7 +33,7 @@ export default function Navbar() {
             <HomeRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
           </Link>
 
-          <Link to={`/personalspace/${currentUser.id}`}>
+          <Link to={`/personalspace/${currentUser.userID}`}>
             <AccountCircleRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
           </Link>
 

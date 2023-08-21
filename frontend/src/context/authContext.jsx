@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState} from "react";
 
 export const AuthContext = createContext();
 
@@ -13,6 +13,10 @@ export const AuthContextProvider = ({ children }) => {
       return null;
     }
   });
+
+  const updateUser = (newData) => {
+    setCurrentUser(prevState => ({ ...prevState, ...newData }));
+  };
 
   const login = async (inputs) => {
     try {
@@ -50,7 +54,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout }}>
+    <AuthContext.Provider value={{ currentUser, updateUser, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
