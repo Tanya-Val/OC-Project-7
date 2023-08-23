@@ -12,11 +12,13 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import { AuthContext } from '../../context/authContext.jsx';
 
-
 export default function Post({ post }) {
-
     const { currentUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
+
+    const [postDesc, setPostDesc] = useState(post.desc); // Store the post description in state
+
+
 
     // Fetch likes
     const { isLoading, error, data } = useQuery(['likes', post.postID], () =>
@@ -33,15 +35,47 @@ export default function Post({ post }) {
         {
             onSuccess: () => {
                 queryClient.invalidateQueries(["likes"])
+
+
             },
         }
     );
+
 
     const handleLike = () => {
         mutation.mutate(data.includes(currentUser.userID))
     };
 
     const [commentOpen, setCommentOpen] = useState(false);
+
+
+    let newDescForMutation = ''; // Define a variable to capture newDesc
+
+    const editPostMutation = useMutation((newDesc) => {
+        // Send the updated description to the backend
+        return makeRequest.put(`/forum/${post.postID}`, { newDesc });
+    }, {
+        onSuccess: () => {
+            // Invalidate the relevant query to update the data
+            queryClient.invalidateQueries(["likes"]);
+
+            setPostDesc(newDescForMutation); // Use the captured newDesc value
+            console.log("Updated postDesc:", newDescForMutation); // Add this line
+        },
+    })
+
+    const handleEdit = () => {
+        const newDesc = prompt("Edit your post:", postDesc);
+        console.log("New Description:", newDesc); // Log the new description
+        if (newDesc !== null) {
+            console.log("Before Mutation"); // Add this line
+            newDescForMutation = newDesc; // Capture newDesc
+            editPostMutation.mutate(newDescForMutation); // Use the captured value
+            console.log("After Mutation"); // Add this line
+            setPostDesc(newDescForMutation);
+            console.log("Updated postDesc:", newDescForMutation); // Log the updated description
+        }
+    };
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -50,8 +84,6 @@ export default function Post({ post }) {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
-
-
 
     return (
         <div className="post">
@@ -73,7 +105,12 @@ export default function Post({ post }) {
 
                 </div>
                 <div className="content">
+
+                    {console.log("Rendered Description:", postDesc)}
                     <p>{post.desc}</p>
+                    {post.userID === currentUser.userID && (
+                        <button className="edit" onClick={() => handleEdit(post.postID)}>Edit</button>
+                    )}
                     <img src={"./upload/" + post.image} alt="" />
                 </div>
                 <div className="info">
@@ -83,10 +120,9 @@ export default function Post({ post }) {
                             ?
                             <FavoriteRoundedIcon style={{ color: "#D1515A" }} onClick={handleLike} />
                             :
-                            < FavoriteBorderRoundedIcon onClick={handleLike} />}
+                            <FavoriteBorderRoundedIcon onClick={handleLike} />}
                         {data.length} Likes
                     </div>
-                    
 
                     <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
                         <ChatBubbleOutlineRoundedIcon />
