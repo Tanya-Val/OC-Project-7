@@ -10,6 +10,9 @@ export default function Profile() {
     const { currentUser, updateUser } = useContext(AuthContext);
     const userID = useLocation().pathname.split("/")[2];
 
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [department, setDepartment] = useState('');
@@ -88,6 +91,25 @@ export default function Profile() {
         }
     };
 
+// Function to handle account deletion
+const handleDeleteAccount = async () => {
+    // Close the delete confirmation popup
+    setShowDeleteConfirmation(false);
+
+    try {
+        // Make an API request to delete the user account
+        const response = await makeRequest.delete(`/users/delete/${userID}`);
+        console.log('Account deleted successfully:', response.data);
+
+        // Redirect to the home page ("/")
+        window.location.href = '/';
+
+        // Redirect the user to the login page or handle any other necessary actions
+    } catch (error) {
+        console.error('Error deleting account:', error);
+    }
+};
+
 
     return (
         <div className="profile">
@@ -146,6 +168,23 @@ export default function Profile() {
                 </form>
 
                 <button onClick={handleUpdate}>Update</button>
+            
+            
+            
+            {/* Delete Account Button */}
+            <button onClick={() => setShowDeleteConfirmation(true)}>Delete Account</button>
+
+            {/* Delete Confirmation Popup */}
+            {showDeleteConfirmation && (
+                <div className="delete-confirmation">
+                    <p>Are you sure you want to delete your account?</p>
+                    <button onClick={handleDeleteAccount}>Confirm</button>
+                    <button onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+                </div>
+            )}
+            
+            
+            
             </div>
         </div>
     );

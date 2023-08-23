@@ -72,6 +72,56 @@ exports.uploadFile = (req, res) => {
     });
 }
 
+// user.js controllers
+
+// ... (other controller functions)
+
+exports.deleteUser = (req, res) => {
+    const userID = req.params.userID;
+
+    // Delete likes associated with the user
+    const deleteLikesQuery = "DELETE FROM likes WHERE userID = ?";
+    connection.query(deleteLikesQuery, [userID], (err) => {
+        if (err) {
+            console.error('Error deleting likes:', err);
+            return res.status(500).json(err);
+        }
+
+        // Delete comments created by the user
+        const deleteCommentsQuery = "DELETE FROM comments WHERE userID = ?";
+        connection.query(deleteCommentsQuery, [userID], (err) => {
+            if (err) {
+                console.error('Error deleting comments:', err);
+                return res.status(500).json(err);
+            }
+
+            // Delete posts created by the user
+            const deletePostsQuery = "DELETE FROM posts WHERE userID = ?";
+            connection.query(deletePostsQuery, [userID], (err) => {
+                if (err) {
+                    console.error('Error deleting posts:', err);
+                    return res.status(500).json(err);
+                }
+
+                // Finally, delete the user's account
+                const deleteUserQuery = "DELETE FROM users WHERE userID = ?";
+                connection.query(deleteUserQuery, [userID], (err) => {
+                    if (err) {
+                        console.error('Error deleting user account:', err);
+                        return res.status(500).json(err);
+                    }
+
+                    console.log('User account and associated data deleted successfully');
+                    
+                
+                    
+                    
+                    return res.status(200).json({ message: 'User account deleted successfully' });
+                });
+            });
+        });
+    });
+};
 
 
 // const jwt = require('jsonwebtoken');
