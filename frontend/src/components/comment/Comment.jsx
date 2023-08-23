@@ -46,6 +46,24 @@ export default function Comment({ postID }) {
 
   };
 
+  const deleteMutation = useMutation(
+    (commentID) => {
+      return makeRequest.delete("/comments", { data: { commentID } })
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["comments"])
+      },
+    }
+  );
+
+  const handleDeleteClick = async (commentID) => {
+    console.log('Deleting Comment ID:', commentID); // Log comment ID being deleted
+    deleteMutation.mutate(commentID);
+  };
+
+  console.log(currentUser.userID )
+  
 
 
   return (
@@ -53,7 +71,7 @@ export default function Comment({ postID }) {
 
 
       <div className="write">
-        
+
         <img src={currentUser.profilePicture} alt="" />
         <input type="text" placeholder="Write a comment"
           value={comment}
@@ -67,8 +85,13 @@ export default function Comment({ postID }) {
           <div className="info">
             <span> {comment.firstName} {comment.lastName} </span>
             <p> {comment.comment} </p>
+            {currentUser.userID === comment.userID && (
+            <button className ="delete" onClick={() => handleDeleteClick(comment.commentID)}>Delete</button>
+          )}
           </div>
           <span className="time">{moment(comment.created_date).fromNow()}</span>
+          
+          {console.log(comment.userID)}
         </div>
 
       ))}

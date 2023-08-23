@@ -53,6 +53,17 @@
             p{
                 font-size: 16px;
             }
+
+            .delete {
+                border:none;
+                background-color: transparent;
+                color:#D1515A;
+                font-weight: 300;
+                padding: 0px;
+                margin-top: 10px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
         }
 
         .time {
@@ -61,6 +72,8 @@
             font-size: 12px;
             color: gray;
         }
+
+        
 
     }
 }

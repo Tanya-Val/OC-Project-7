@@ -57,3 +57,33 @@ exports.addComment = (req, res) => {
       });
     })
   };
+
+  exports.deleteComment = (req, res) => {
+    const token = req.cookies.accessToken;
+    if (!token) return res.status(401).json("Not logged in!")
+    jwt.verify(token, "secretkey", (err, userInfo) => {
+      if (err) return res.status(403).json("Token is not valid!")
+  
+      console.log('User Info:', userInfo); // Log user info
+
+      const deleteQuery = "DELETE FROM comments WHERE commentID = ? AND userID = ?";
+  
+      const values = [
+        req.body.commentID,
+        userInfo.id
+      ];
+  
+      console.log('Delete Values:', values); // Log delete values
+
+      connection.query(deleteQuery, values, (err, data) => {
+        if (err) {
+          console.error('Error occurred while deleting a comment:', err);
+          return res.status(500).json("Error occurred while deleting a comment!");
+        }
+        console.log('Delete Result:', data); // Log delete result
+        return res.status(200).json(data);
+      });
+    })
+};
+
+
