@@ -66,16 +66,42 @@ export default function Post({ post }) {
 
     const handleEdit = () => {
         const newDesc = prompt("Edit your post:", postDesc);
-        console.log("New Description:", newDesc); // Log the new description
+        //console.log("New Description:", newDesc); // Log the new description
         if (newDesc !== null) {
-            console.log("Before Mutation"); // Add this line
+            //console.log("Before Mutation"); // Add this line
             newDescForMutation = newDesc; // Capture newDesc
             editPostMutation.mutate(newDescForMutation); // Use the captured value
-            console.log("After Mutation"); // Add this line
+            //console.log("After Mutation"); // Add this line
             setPostDesc(newDescForMutation);
-            console.log("Updated postDesc:", newDescForMutation); // Log the updated description
+            //console.log("Updated postDesc:", newDescForMutation); // Log the updated description
         }
     };
+
+
+
+    const addCommentMutation = useMutation(
+        (newComment) => makeRequest.post('/comments', newComment),
+        {
+            onSuccess: () => {
+                // After successfully adding a comment, invalidate the countComments query
+                queryClient.invalidateQueries(['countComments'], { refetchActive: true });
+            },
+        }
+    );
+
+    const handleAddComment = () => {
+        
+        addCommentMutation.mutate();
+
+        
+
+    };
+
+    const { data: commentCount } = useQuery(['countComments', post.postID], () =>
+        makeRequest.get(`/comments/count?postID=${post.postID}`).then((res) => {
+            return res.data;
+        })
+    );
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -108,10 +134,12 @@ export default function Post({ post }) {
 
                     {console.log("Rendered Description:", postDesc)}
                     <p>{post.desc}</p>
+
                     {post.userID === currentUser.userID && (
                         <button className="edit" onClick={() => handleEdit(post.postID)}>Edit</button>
                     )}
                     <img src={"./upload/" + post.image} alt="" />
+
                 </div>
                 <div className="info">
 
@@ -126,11 +154,11 @@ export default function Post({ post }) {
 
                     <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
                         <ChatBubbleOutlineRoundedIcon />
-                        12 Comments
+                        {commentCount} Comments
                     </div>
 
                 </div>
-                {commentOpen && <Comment key={post.postID} postID={post.postID} />}
+                {commentOpen && <Comment key={post.postID} postID={post.postID} handleAddComment={handleAddComment} />}
 
             </div>
         </div>

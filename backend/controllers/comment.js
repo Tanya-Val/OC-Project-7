@@ -86,4 +86,16 @@ exports.addComment = (req, res) => {
     })
 };
 
+exports.countComments = (req, res) => {
+  const countQuery = 'SELECT COUNT(*) as commentCount FROM comments WHERE postID = ?';
+  connection.query(countQuery, [req.query.postID], (err, data) => {
+      if (err) {
+          console.error('Error occurred while counting comments:', err);
+          return res.status(500).json(err);
+      }
+      return res.status(200).json(data[0].commentCount);
+  });
+};
+
+
 

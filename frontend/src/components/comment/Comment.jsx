@@ -7,7 +7,7 @@ import { makeRequest } from '../../axios';
 import moment from 'moment';
 
 
-export default function Comment({ postID }) {
+export default function Comment({ postID, handleAddComment }) {
 
   const [comment, setComment] = useState("");
   const { currentUser } = useContext(AuthContext);
@@ -31,6 +31,7 @@ export default function Comment({ postID }) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["comments"])
+        //handleAddComment(comment);
       },
     })
 
@@ -39,10 +40,18 @@ export default function Comment({ postID }) {
   const handleClick = async (e) => {
     e.preventDefault();
 
+
+    // Check if the comment is empty before sending it
+    if (comment.trim() === '') {
+      return;
+  }
+
     mutation.mutate({ comment, postID: postID });
     setComment("");
 
     console.log(comment)
+    handleAddComment(comment);
+    
 
   };
 
@@ -53,6 +62,7 @@ export default function Comment({ postID }) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["comments"])
+        queryClient.invalidateQueries(['countComments', postID]);
       },
     }
   );
