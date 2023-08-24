@@ -113,7 +113,7 @@ const handleDeleteAccount = async () => {
 
     return (
         <div className="profile">
-            <img
+            {/* <img
                 src={data.profilePicture}
                 alt=""
                 className="profilePicture"
@@ -122,7 +122,7 @@ const handleDeleteAccount = async () => {
             <input type="file" onChange={(e) => {
                 setProfilePicture(e.target.files[0]);
                 console.log(e.target.files[0], "console.log(e.target.files[0])"); // Add this line
-            }} />
+            }} /> */}
 
 
             <span>{data.firstName} {data.lastName}</span>
@@ -177,9 +177,9 @@ const handleDeleteAccount = async () => {
             {/* Delete Confirmation Popup */}
             {showDeleteConfirmation && (
                 <div className="delete-confirmation">
-                    <p>Are you sure you want to delete your account?</p>
-                    <button onClick={handleDeleteAccount}>Confirm</button>
-                    <button onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
+                    <p className="alertText">Are you sure you want to delete your account?</p>
+                    <button className="alertBtn" onClick={handleDeleteAccount}>Confirm</button>
+                    <button className="alertCancel"onClick={() => setShowDeleteConfirmation(false)}>Cancel</button>
                 </div>
             )}
             

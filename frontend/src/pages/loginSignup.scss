@@ -1,7 +1,6 @@
-//@import "../layouts/nav--login-signup.scss";
+
 @import "../utils/variables.scss";
-//@import "../components/form--login-signup.scss";
-//@import "../utils/resets.scss";
+
 
 .Login {
     height: 80vh;
@@ -98,4 +97,87 @@
             }
         }
     }
+}
+
+@media (max-width: 768px) {
+
+    .Login {
+        //height: 80vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-top: 0;
+    
+        .LoginSignup--Main {
+            display: flex;
+            flex-direction: column;
+            border: none;
+            width: 100%;
+            padding-top: 30px;
+            //max-height: 500px;
+            .login-form-container {
+                //flex: 1;
+                //padding-bottom: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                
+    
+                form {
+                    
+                    width: 80%;
+                    gap: 15px;
+                    input {
+                        padding: 8px;
+                        border-radius: 4px;
+                        font-size: 12px;
+                        
+                    }
+                }
+    
+                button {
+                    width: 80%;
+                    padding: 8px;
+                    font-size: 14px;
+                    border-radius: 4px;
+                }
+            }
+    
+            .login-image-container {
+                border-radius: none;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                color: white;
+    
+                h1 {
+                    font-size: 30px;
+                }
+    
+                p {
+                    font-size: 14px;
+                    margin-left: 10%;
+                    margin-right: 10%;
+
+                }
+    
+                span {
+                    font-size: 16px;
+                }
+    
+                button {
+                    width: 100%;
+                    padding: 8px;
+                    font-size: 14px;
+                    border-radius: 4px;
+                    
+                }
+            }
+        }
+    }
+
 }

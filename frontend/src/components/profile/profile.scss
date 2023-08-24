@@ -11,6 +11,7 @@
     width: 50%;
     max-height: 75vh;
     margin-top: 12vh;
+    width: 40%;
     
 
     @media (max-width: 480px) {
@@ -27,8 +28,10 @@
     }
 
     span{
+        padding-top: 30px;
         font-weight: 500;
         font-size: 22px;
+        color: $primary-color-blue;
         
     }
 
@@ -76,5 +79,65 @@
             }
             cursor: pointer;
         }
+
+        .delete-confirmation{
+            
+            .alertText{
+                color: #d1515a;
+                padding-bottom: 20px;
+                font-weight: 500;
+            }
+            .alertBtn{
+                width: 50%;
+                background-color:#d1515a;
+
+            }
+            .alertCancel{
+                width: 50%;
+            }
+
+        }
     }
+}
+
+@media (max-width: 768px){
+    .profile{
+        width: 90%;
+        border-radius: 4px;
+    
+        span{
+            font-weight: 500;
+            font-size: 26px;
+            
+        }
+    
+        .form-container{
+            width: 90%;
+            
+        
+            p {
+                font-size: 14;
+                font-weight: 300;
+
+            }
+    
+            form {
+                
+                input {
+                    padding: 9px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                }
+            }
+    
+            button {
+                width: 100%;
+                padding: 9px;
+                font-size: 14px;
+                border-radius: 4px;
+                
+            }
+        }
+    }
+
 }
