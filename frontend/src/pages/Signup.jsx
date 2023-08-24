@@ -27,6 +27,18 @@ export default function SignupPage() {
   const handleClick = async (e) => {
     e.preventDefault();
 
+
+    if (
+      !inputs.firstName ||
+      !inputs.lastName ||
+      !inputs.department ||
+      !inputs.email ||
+      !inputs.password
+    ) {
+      setErr("Please fill in all required fields.");
+      return;
+    }
+
     try {
       await Axios.post("http://localhost:3000/api/auth/signup", inputs);
       // Call the login function after successful signup
@@ -110,8 +122,9 @@ export default function SignupPage() {
                 onChange={handleChange}
               />
             </form>
-            {err && err}
+            
             <button onClick={handleClick} type="button">Create Account</button>
+            {err && <div className="error-message">{err}</div>}
           </div>
         </div>
       </div>
