@@ -117,7 +117,7 @@ export default function Post({ post }) {
                 <div className="user">
                     <div className="userInfo">
 
-                        <img src={post.profilePicture} alt="profilePicture" />
+                        {/* <img src={post.profilePicture} alt="profilePicture" /> */}
                         <div className="details" >
                             <Link to={`/personalspace/${post.userID}`} style={{ textDecoration: "none" }}>
                                 <span className="name">{post.firstName} {post.lastName}</span>

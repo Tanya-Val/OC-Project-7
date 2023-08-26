@@ -57,10 +57,10 @@ export default function createPost() {
 
           <div className="left">
 
-            <img
+            {/* <img
               src={currentUser.profilePicture}
               alt=""
-            />
+            /> */}
             <input type="text"
               placeholder={`What's on your mind ${currentUser.firstName}?`}
               onChange={(e) => setDesc(e.target.value)} 

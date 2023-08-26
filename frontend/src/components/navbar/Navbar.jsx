@@ -42,7 +42,7 @@ export default function Navbar() {
           </a>
 
           <div className="user">
-            <img src={currentUser.profilePicture} alt="" />
+            {/* <img src={currentUser.profilePicture} alt="" /> */}
             <span>
               {currentUser.firstName} {currentUser.lastName}
             </span>
