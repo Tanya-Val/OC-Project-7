@@ -21,7 +21,7 @@ const upload = multer({ storage: storage });
 
 router.get("/find/:userID", getUser);
 router.put("/update/:userID", updateUser);
-router.post("/uploadFile", upload.single('file'), uploadFile); // Add this line
+//router.post("/uploadFile", upload.single('file'), uploadFile); // Add this line
 router.delete("/delete/:userID", deleteUser); // Add this line for account deletion
 
 module.exports = router;

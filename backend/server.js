@@ -1,8 +1,6 @@
 const http = require('http');
 const app = require('./app');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const connection = require('./db.js'); // Replace with the actual path to your MySQL connection file
-
 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);

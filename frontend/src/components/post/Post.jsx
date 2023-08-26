@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import "./post.scss"
+import React, { useContext, useState } from 'react';
+import "./post.scss";
 import { Link } from 'react-router-dom';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
@@ -16,17 +16,16 @@ export default function Post({ post }) {
     const { currentUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
 
-    const [postDesc, setPostDesc] = useState(post.desc); // Store the post description in state
+    const [postDesc, setPostDesc] = useState(post.desc); 
 
-
-
-    // Fetch likes
+    // Fetch likes using a query
     const { isLoading, error, data } = useQuery(['likes', post.postID], () =>
         makeRequest.get('/likes?postID=' + post.postID).then((res) => {
             return res.data;
         })
     );
 
+    // Define a mutation to handle liking and unliking a post
     const mutation = useMutation(
         (liked) => {
             if (liked) return makeRequest.delete("/likes?postID=" + post.postID);
@@ -34,69 +33,58 @@ export default function Post({ post }) {
         },
         {
             onSuccess: () => {
-                queryClient.invalidateQueries(["likes"])
-
-
+                queryClient.invalidateQueries(["likes"]);
             },
         }
     );
 
-
+    // Function to handle liking/unliking a post
     const handleLike = () => {
         mutation.mutate(data.includes(currentUser.userID))
     };
 
+    // State to manage comment visibility
     const [commentOpen, setCommentOpen] = useState(false);
 
+    // State to store new description for post editing
+    let newDescForMutation = ''; 
 
-    let newDescForMutation = ''; // Define a variable to capture newDesc
-
+    // Define a mutation to edit the post description
     const editPostMutation = useMutation((newDesc) => {
-        // Send the updated description to the backend
         return makeRequest.put(`/forum/${post.postID}`, { newDesc });
     }, {
         onSuccess: () => {
-            // Invalidate the relevant query to update the data
             queryClient.invalidateQueries(["likes"]);
-
-            setPostDesc(newDescForMutation); // Use the captured newDesc value
-            console.log("Updated postDesc:", newDescForMutation); // Add this line
+            setPostDesc(newDescForMutation); 
         },
-    })
+    });
 
+    // Function to handle post editing
     const handleEdit = () => {
         const newDesc = prompt("Edit your post:", postDesc);
-        //console.log("New Description:", newDesc); // Log the new description
         if (newDesc !== null) {
-            //console.log("Before Mutation"); // Add this line
-            newDescForMutation = newDesc; // Capture newDesc
-            editPostMutation.mutate(newDescForMutation); // Use the captured value
-            //console.log("After Mutation"); // Add this line
+            newDescForMutation = newDesc; 
+            editPostMutation.mutate(newDescForMutation); 
             setPostDesc(newDescForMutation);
-            //console.log("Updated postDesc:", newDescForMutation); // Log the updated description
         }
     };
 
-
-
+    // Define a mutation to add a comment
     const addCommentMutation = useMutation(
         (newComment) => makeRequest.post('/comments', newComment),
         {
             onSuccess: () => {
-                // After successfully adding a comment, invalidate the countComments query
                 queryClient.invalidateQueries(['countComments'], { refetchActive: true });
             },
         }
     );
 
+    // Function to handle adding a comment
     const handleAddComment = () => {
-        
         addCommentMutation.mutate();
-
-        
-
     };
 
+    // Query to fetch comment count
     const { data: commentCount } = useQuery(['countComments', post.postID], () =>
         makeRequest.get(`/comments/count?postID=${post.postID}`).then((res) => {
             return res.data;
@@ -116,33 +104,23 @@ export default function Post({ post }) {
             <div className="container">
                 <div className="user">
                     <div className="userInfo">
-
-                        {/* <img src={post.profilePicture} alt="profilePicture" /> */}
                         <div className="details" >
                             <Link to={`/personalspace/${post.userID}`} style={{ textDecoration: "none" }}>
                                 <span className="name">{post.firstName} {post.lastName}</span>
-
                             </Link>
                             <span className="date"> {moment(post.created_date).fromNow()} </span>
                         </div>
-
                     </div>
                     <MoreHorizRoundedIcon />
-
                 </div>
                 <div className="content">
-
-                    {console.log("Rendered Description:", postDesc)}
                     <p>{post.desc}</p>
-
                     {post.userID === currentUser.userID && (
                         <button className="edit" onClick={() => handleEdit(post.postID)}>Edit</button>
                     )}
                     <img src={"./upload/" + post.image} alt="" />
-
                 </div>
                 <div className="info">
-
                     <div className="item" >
                         {data.includes(currentUser.userID)
                             ?
@@ -151,15 +129,12 @@ export default function Post({ post }) {
                             <FavoriteBorderRoundedIcon onClick={handleLike} />}
                         {data.length} Likes
                     </div>
-
                     <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
                         <ChatBubbleOutlineRoundedIcon />
                         {commentCount} Comments
                     </div>
-
                 </div>
                 {commentOpen && <Comment key={post.postID} postID={post.postID} handleAddComment={handleAddComment} />}
-
             </div>
         </div>
     )

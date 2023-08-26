@@ -6,6 +6,5 @@ router.get("/", getLikes);
 router.post("/", addLike);
 router.delete("/", deleteLike);
 
-
 module.exports = router;
 

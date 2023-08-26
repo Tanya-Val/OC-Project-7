@@ -9,12 +9,13 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/authContext.jsx';
 
 export default function Navbar() {
+  // Get current user information and logout function from the AuthContext
   const { currentUser, logout } = useContext(AuthContext);
-  
 
+  // Function to handle user logout
   const handleLogout = () => {
     logout(); // Call the logout function from AuthContext
-    window.location.href = '/'; // Redirect to /signup after logout
+    window.location.href = '/'; // Redirect to the home page after logout
   };
 
   return (
@@ -23,26 +24,30 @@ export default function Navbar() {
       <nav className="navbar">
         <div className="left">
           <Link to="/forum">
+            {/* Company logo */}
             <img src={logo} className="logo" alt="company logo" />
             <img src={logoIcon} className="logoIcon" alt="company logo" />
           </Link>
         </div>
 
         <div className="right">
+          {/* Link to the forum home */}
           <Link to="/forum">
             <HomeRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
           </Link>
 
+          {/* Link to the user's personal space */}
           <Link to={`/personalspace/${currentUser.userID}`}>
             <AccountCircleRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
           </Link>
 
+          {/* Button to log out */}
           <a href="/" onClick={handleLogout}>
             <LogoutRoundedIcon fontSize="medium" sx={{ color: 'white' }} />
           </a>
 
           <div className="user">
-            {/* <img src={currentUser.profilePicture} alt="" /> */}
+            {/* Display the current user's name */}
             <span>
               {currentUser.firstName} {currentUser.lastName}
             </span>

@@ -10,18 +10,14 @@ import { useContext } from 'react';
 import { AuthContext } from './context/authContext.jsx'; // Import the AuthContext
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-
+// Create a new instance of QueryClient
 const queryClient = new QueryClient()
 
 function App() {
-
-  //change to false for restriction TEST
-  //const currentUser = false;
-
   // Access the currentUser from AuthContext
   const { currentUser } = useContext(AuthContext);
 
-
+  // Define the layout component, which includes Navbar and Outlet
   const Layout = () => {
     return (
       <QueryClientProvider client={queryClient}>
@@ -33,25 +29,24 @@ function App() {
     );
   };
 
+  // Define a ProtectedRoute component to protect routes that require authentication
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/" />;
     }
-
     return children;
   };
 
+  // Create a router using createBrowserRouter
   const router = createBrowserRouter([
     {
       path: "/",
       element: <LoginSignup />,
     },
-
     {
       path: "/signup",
       element: <Signup />,
     },
-
     {
       path: "/forum",
       element: (
@@ -63,10 +58,9 @@ function App() {
         {
           path: "/forum",
           element: <Forum />,
-        }
-      ]
+        },
+      ],
     },
-
     {
       path: "/personalspace/:id",
       element: (
@@ -74,10 +68,12 @@ function App() {
           <Layout />
         </ProtectedRoute>
       ),
-      children: [{
-        path: "/personalspace/:id",
-        element: <PersonalSpace />,
-      }]
+      children: [
+        {
+          path: "/personalspace/:id",
+          element: <PersonalSpace />,
+        },
+      ],
     },
   ]);
 
