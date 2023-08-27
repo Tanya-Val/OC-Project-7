@@ -20,9 +20,9 @@ exports.register = (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
-        // Debugging logs
-        console.log('req.body.password:', req.body.password);
-        console.log('salt:', salt);
+        
+        //console.log('req.body.password:', req.body.password);
+        //console.log('salt:', salt);
 
         // SQL query to insert a new user into the database
         const insertQuery = "INSERT INTO users (firstName, lastName, department, email, password) VALUES (?)";
