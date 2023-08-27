@@ -31,14 +31,15 @@ exports.updateUser = (req, res) => {
         updatedData.password = bcrypt.hashSync(updatedData.password, salt);
     }
 
-    const queryUpdateUser = "UPDATE users SET firstName=?, lastName=?, department=? WHERE userID=?;";
+    const queryUpdateUser = "UPDATE users SET firstName=?, lastName=?, department=?, email=?, password=? WHERE userID=?;";
 
-    connection.query(queryUpdateUser, [updatedData.firstName, updatedData.lastName, updatedData.department, userID], (err) => {
+    connection.query(queryUpdateUser, [updatedData.firstName, updatedData.lastName, updatedData.department, updatedData.email, updatedData.password, userID], (err) => {
         if (err) return res.status(500).json(err);
 
         return res.status(200).json({ message: "User updated successfully" });
     });
 };
+
 
 // Function to delete a user's account along with associated data
 exports.deleteUser = (req, res) => {

@@ -18,7 +18,7 @@ export default function Profile() {
     const [department, setDepartment] = useState('');
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState(''); // Add state for newPassword
-    const [profilePicture, setProfilePicture] = useState(null); // Add state for profilePicture
+    
 
     // Fetch user data
     const { isLoading, error, data } = useQuery(['user'], () =>
@@ -38,7 +38,7 @@ export default function Profile() {
     // Function to handle form submission
     const handleUpdate = async (e) => {
         e.preventDefault();
-        let imgUrl = data?.profilePicture;
+        
         // Validate input fields
         if (!firstName || !lastName || !email) {
             console.error('Please fill in all required fields.');
@@ -52,32 +52,10 @@ export default function Profile() {
             department,
             email,
             password: newPassword,
-            profilePicture, // Add the new password
+            
         };
 
-        // If a new profile picture has been selected
-        if (profilePicture) {
-            const formData = new FormData();
-            formData.append('file', profilePicture);
-
-            // Log each key/value pair in formData
-            for (let pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1].name); // This will log the filename
-            }
-
-
-            try {
-                const uploadResponse = await makeRequest.post('/upload', formData);
-                if (uploadResponse && uploadResponse.data) {
-                    updatedData.profilePicture = uploadResponse.data.filename; // Get the filename from the response
-                } else {
-                    console.error('uploadResponse or uploadResponse.data is undefined');
-                }
-            } catch (error) {
-                console.error('Error uploading file:', error);
-                return;
-            }
-        }
+        
 
         // Send the updated data to the server
         try {
