@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/logo_white.png';
 import Axios from 'axios';
@@ -9,6 +9,14 @@ export default function SignupPage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { login } = useContext(AuthContext); // Destructure the login function
   const navigate = useNavigate(); // Initialize useNavigate
+  const [signupError, setSignupError] = useState(null); // State to track signup errors
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    department: '',
+    email: '',
+    password: '',
+  });
 
   const onSubmit = async (data) => {
     try {
@@ -18,7 +26,21 @@ export default function SignupPage() {
       // Redirect to /forum after successful signup and login
       navigate('/forum');
     } catch (err) {
-      console.log(err.response.data);
+      if (err.response.status === 409) {
+        // Handle conflict error (User already exists)
+        setSignupError("User already exists. Please use a different email.");
+        // Reset the form data to the initial state
+        setFormData({
+          firstName: '',
+          lastName: '',
+          department: '',
+          email: '',
+          password: '',
+        });
+      } else {
+        console.log("Error during signup:", err.response.data);
+        // Handle other errors (e.g., network issues, server errors)
+      }
     }
   };
 
@@ -51,39 +73,60 @@ export default function SignupPage() {
                 {...register("firstName", { required: true })}
                 type="text"
                 placeholder="First name"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
               />
-              {errors.firstName && <p>This field is required</p>}
+              {errors.firstName && formData.firstName.length === 0 && (
+                <p className="errors">This field is required</p>
+              )}
 
               <input
                 {...register("lastName", { required: true })}
                 type="text"
                 placeholder="Last name"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
               />
-              {errors.lastName && <p>This field is required</p>}
+              {errors.lastName && formData.lastName.length === 0 && (
+                <p className="errors">This field is required</p>
+              )}
 
               <input
                 {...register("department", { required: true })}
                 type="text"
                 placeholder="Department"
+                value={formData.department}
+                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
               />
-              {errors.department && <p>This field is required</p>}
+              {errors.department && formData.department.length === 0 && (
+                <p className="errors">This field is required</p>
+              )}
 
               <input
                 {...register("email", { required: true })}
                 type="email"
                 placeholder="Enter your email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
-              {errors.email && <p>This field is required</p>}
+              {errors.email && formData.email.length === 0 && (
+                <p className="errors">This field is required</p>
+              )}
 
               <input
                 {...register("password", { required: true })}
                 type="password"
                 placeholder="Enter your password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
-              {errors.password && <p>This field is required</p>}
-              
+              {errors.password && formData.password.length === 0 && (
+                <p className="errors">This field is required</p>
+              )}
+
               <button type="submit">Create Account</button>
             </form>
+            {signupError && <p className="errors">{signupError}</p>}
           </div>
         </div>
       </div>

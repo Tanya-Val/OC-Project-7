@@ -111,7 +111,7 @@ export default function Post({ post }) {
                             <span className="date"> {moment(post.created_date).fromNow()} </span>
                         </div>
                     </div>
-                    <MoreHorizRoundedIcon />
+                   {/*  <MoreHorizRoundedIcon /> */}
                 </div>
                 <div className="content">
                     <p>{post.desc}</p>
