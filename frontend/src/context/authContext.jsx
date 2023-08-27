@@ -27,8 +27,10 @@ export const AuthContextProvider = ({ children }) => {
       setCurrentUser(res.data);
     } catch (error) {
       console.error("Error during login:", error);
+      throw error; // Rethrow the error to see if it's caught by the component.
     }
   };
+  
 
   const logout = () => {
     try {

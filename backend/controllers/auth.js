@@ -53,11 +53,17 @@ exports.login = (req, res) => {
         if (err) return res.status(500).json(err);
         
         // If no user with the email is found, return a not found status
-        if (data.length === 0) return res.status(404).json("User not found!");
+        if (data.length === 0) {
+            // Add an error response with a meaningful message
+            return res.status(404).json({ error: "Invalid email or password." });
+        }
 
         // Check if the provided password matches the stored hashed password
         const checkPassword = bcrypt.compareSync(req.body.password, data[0].password);
-        if (!checkPassword) return res.status(400).json("Wrong password or email!");
+        if (!checkPassword) {
+            // Add an error response with a meaningful message
+            return res.status(400).json({ error: "Invalid email or password." });
+        }
 
         // Create a JWT token for the user
         const token = jwt.sign({
@@ -79,6 +85,7 @@ exports.login = (req, res) => {
         res.status(200).json(others);
     });
 };
+
 
 // Function to handle user logout
 exports.logout = (req, res) => {

@@ -1,35 +1,59 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/logo_white.png';
-import { AuthContext } from '../context/authContext.jsx'; // Import the AuthContext
+import { AuthContext } from '../context/authContext.jsx';
 
 export default function LoginSignupPage() {
+
+  const [error, setError] = useState(null);
+
   const [inputs, setInputs] = useState({
-    username: "",
+    email: "",
     password: "",
   });
-  const [err, setErr] = useState(null);
 
   const navigate = useNavigate();
 
-  // Handle changes in input fields
   const handleChange = (e) => {
     e.preventDefault();
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Access the login function from AuthContext
   const { login } = useContext(AuthContext);
 
-  // Handle the login process
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    console.log("Inside handleLogin"); // Log to check if the function is being called
+
+    // Basic validation
+    if (!inputs.email || !inputs.password) {
+      console.log("Setting error message: Please enter both email and password.");
+      setError("Please enter both email and password.");
+      // Clear the input fields
+      setInputs({
+        email: "",
+        password: "",
+      });
+      return;
+    }
+
     try {
-      await login(inputs); // Call the login function from AuthContext
-      navigate("/forum"); // Redirect to the forum after successful login
+      await login(inputs);
+      navigate("/forum");
     } catch (err) {
-      setErr(err.response.data); // Set error message if login fails
-    };
+      console.log("Error in login:", err); // Log the error to check if it's caught
+      if (err.response && err.response.data) {
+        setError(err.response.data.error || "An error occurred during login.");
+        // Clear the input fields
+        setInputs({
+          email: "",
+          password: "",
+        });
+      } else {
+        setError("An error occurred during login.");
+      }
+    }
   };
 
   return (
@@ -48,8 +72,7 @@ export default function LoginSignupPage() {
         <div className="LoginSignup--Main">
           <div className="login-form-container">
             <h2>Welcome back!</h2>
-            {/* Display login status or error message */}
-            {/* <p> {loginStatus} </p> */}
+            {/* {error && <p className="error">{error}</p>} */}
 
             <form>
               <input
@@ -58,6 +81,7 @@ export default function LoginSignupPage() {
                 required
                 name="email"
                 onChange={handleChange}
+                value={inputs.email}
               />
 
               <input
@@ -66,8 +90,11 @@ export default function LoginSignupPage() {
                 required
                 name="password"
                 onChange={handleChange}
+                value={inputs.password}
               />
             </form>
+
+            {error && <p className="error">{error}</p>}
 
             <button onClick={handleLogin} type="button">Login</button>
           </div>
