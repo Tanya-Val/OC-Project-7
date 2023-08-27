@@ -11,8 +11,6 @@ cd backend
 
 npm install
 
-->following by:
-
 npm start
 
 ***.env data on request**
