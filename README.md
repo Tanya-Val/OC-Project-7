@@ -1,7 +1,5 @@
 # Groupomnia -> OC Final Project 
 
-
-
 ## Installation
 
 ### Backend
@@ -13,10 +11,9 @@ cd backend
 
 npm install
 
-->following by:
-
 npm start
 
+***.env data on request**
 
 ### Frontend
 
@@ -32,6 +29,8 @@ npm install
 3. Start the development server using the following command:
 
 npm run dev
+
+
 
 
 
